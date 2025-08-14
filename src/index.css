@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--color-fg) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-fg) 10%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: top left;
+}
+
+/* divider line */
+.divider {
+  height: 1px;
+  background: color-mix(in oklab, var(--color-fg) 10%, transparent);
+}
+
+/* soft card hover */
+.card {
+  transition: box-shadow .25s, transform .25s;
+}
+.card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,.07);
+  transform: translateY(-2px);
+}
+
+/* Your exact palette as theme tokens */
+@theme {
+  --color-bg: #ffffff;   /* Background */
+  --color-fg: #000000;   /* Text/primary */
+  --color-muted-1: #f5f5f5;
+  --color-muted-2: #e5e5e5;
+
+   /* font tokens (Google Fonts) */
+  --font-heading: "Roboto", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Global base */
+html, body, #root { min-height: 100%; }
+body { @apply bg-bg text-fg; }
+
+/* Accessible focus */
+:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.heading { font-family: var(--font-heading); font-weight: 600; letter-spacing: -0.01em; }
