@@ -12,7 +12,6 @@ import MiniContactForm from "../components/MiniContactForm";
 export default function Home() {
   
   const kpiRefs = useRef<HTMLDivElement[]>([]);
-  const logoRefs = useRef<HTMLDivElement[]>([]);
 
   // helper for array refs
   function setAt<T extends HTMLElement>(arr: React.MutableRefObject<T[]>, index: number) {
