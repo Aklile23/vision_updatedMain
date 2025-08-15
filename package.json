@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource/inter": "^5.2.6",
     "@fontsource/space-grotesk": "^5.2.8",
+    "@hookform/resolvers": "^5.2.1",
     "@studio-freight/lenis": "^1.0.42",
     "@tailwindcss/vite": "^4.1.11",
     "framer-motion": "^12.23.12",

@@ -42,3 +42,9 @@ body { @apply bg-bg text-fg; }
 /* Accessible focus */
 :focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
 .heading { font-family: var(--font-heading); font-weight: 600; letter-spacing: -0.01em; }
+
+@keyframes slide-accent {
+  from { transform: translateX(-20%); }
+  to   { transform: translateX(20%); }
+}
+
