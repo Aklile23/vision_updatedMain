@@ -196,7 +196,7 @@ export default function Navbar() {
           </div>
         </Container>
       </header>
-
+      {/* mobile Menu Contents*/}
       <AnimatePresence>
        {mobileMenuOpen && (
          <motion.div
@@ -219,7 +219,7 @@ export default function Navbar() {
 
            {/* Floating elements */}
            <motion.div
-             className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full border border-bg/20"
+             className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full border border-bg/15"
              animate={{
                rotate: [0, 360],
                scale: [1, 1.1, 1],
@@ -231,7 +231,7 @@ export default function Navbar() {
              }}
            />
            <motion.div
-             className="absolute bottom-1/3 right-1/3 w-24 h-24 rounded-full border border-bg/15"
+             className="absolute bottom-1/3 right-1/3 w-24 h-24 rounded-full border border-bg/10"
              animate={{
                rotate: [360, 0],
                scale: [1, 0.9, 1],
@@ -258,10 +258,10 @@ export default function Navbar() {
                animate={{ y: 0, opacity: 1 }}
                transition={{ duration: 0.6, delay: 0.3 }}
              >
-               <div className="flex items-center gap-4">
+               <div className="flex items-center gap-2 pr-10">
                  <div className="w-12 h-12 rounded-xl overflow-hidden">
                    <img
-                     src="/logo.png"
+                     src="/images/logo_white.png"
                      alt="VisionLab Technologies"
                      className="w-full h-full object-contain"
                      style={{ filter: 'brightness(0) invert(1)' }}
