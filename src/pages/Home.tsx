@@ -628,7 +628,7 @@ export default function Home() {
                       highlight: "AI-Powered",
                       progress: 0.8
                     }
-                  ].map((item, i) => {
+                  ].map((item,) => {
                     const timelineRef = useRef<HTMLDivElement>(null);
                     const { scrollYProgress } = useScroll({
                       target: timelineRef,

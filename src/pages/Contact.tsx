@@ -121,10 +121,10 @@ export default function Contact() {
   };
 
   // Small utility: build a maps link
-  function mapHref(address: string) {
-    const q = encodeURIComponent(address);
-    return `https://www.google.com/maps/search/?api=1&query=${q}`;
-  }
+  // function mapHref(address: string) {
+  //   const q = encodeURIComponent(address);
+  //   return `https://www.google.com/maps/search/?api=1&query=${q}`;
+  // }
 
   // Copy button used in contact rows
   function CopyButton({ text }: { text: string }) {
@@ -177,20 +177,20 @@ export default function Contact() {
   }
 
   // Simple map iframe embed (no API key required)
-  function MapEmbed({ address, zoom = 15 }: { address: string; zoom?: number }) {
-    const src = `https://www.google.com/maps?q=${encodeURIComponent(address)}&z=${zoom}&output=embed`;
-    return (
-      <div className="relative">
-        <iframe
-          title={`Map to ${address}`}
-          src={src}
-          className="w-full aspect-[16/10]"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-      </div>
-    );
-  }
+  // function MapEmbed({ address, zoom = 15 }: { address: string; zoom?: number }) {
+  //   const src = `https://www.google.com/maps?q=${encodeURIComponent(address)}&z=${zoom}&output=embed`;
+  //   return (
+  //     <div className="relative">
+  //       <iframe
+  //         title={`Map to ${address}`}
+  //         src={src}
+  //         className="w-full aspect-[16/10]"
+  //         loading="lazy"
+  //         referrerPolicy="no-referrer-when-downgrade"
+  //       />
+  //     </div>
+  //   );
+  // }
 
   return (
     <main className="min-h-screen bg-white text-black relative overflow-hidden">
@@ -235,7 +235,7 @@ export default function Contact() {
         <Container>
           {/* Floating grid pattern */}
         <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(var(--color-fg)_1px,transparent_1px),linear-gradient(90deg,var(--color-fg)_1px,transparent_1px)] [background-size:64px_64px]" />
-          <div className="py-20 relative">
+          <div className="py-40 relative">
             <div className="animate-slideInUp">
               <div className="inline-flex items-center gap-2 rounded-full bg-black/5 px-4 py-2 text-xs tracking-wide backdrop-blur-sm border border-black/10">
                 <div className="w-2 h-2 bg-black rounded-full animate-pulse" />
@@ -260,7 +260,7 @@ export default function Contact() {
       </section>
 
       {/* Main content */}
-      <section className="py-16 relative">
+      <section className="relative">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12">
             {/* Form section */}
