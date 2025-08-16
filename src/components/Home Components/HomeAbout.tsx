@@ -59,9 +59,9 @@ const HomeAbout = () => {
                 Our Identity & Purpose
             </h2>
             <p className="text-xl md:text-2xl text-fg/70 max-w-3xl mx-auto leading-relaxed font-light">
-            Based in Addis Ababa and serving a global clientele, we combine engineering precision
-            with innovative thinking to deliver BIM, AI, and intelligent system solutions that
-            stand the test of time.
+                Based in Addis Ababa and serving a global clientele, we combine engineering precision
+                with innovative thinking to deliver BIM, AI, and intelligent system solutions that
+                stand the test of time.
             </p>
             </motion.div>
 
@@ -192,7 +192,7 @@ const HomeAbout = () => {
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-fg/5 to-transparent opacity-50" />
                 <div className="relative">
                 <blockquote className="text-lg md:text-xl font-light text-fg/90 leading-relaxed italic mb-6">
-                    "We don't just deliver services—we forge partnerships to create intelligent solutions that transform how you work, 
+                    "We don't just deliver services, we forge partnerships to create intelligent solutions that transform how you work, 
                     build, and innovate in the digital landscape."
                 </blockquote>
                 <div className="flex justify-center gap-4">

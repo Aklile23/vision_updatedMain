@@ -32,7 +32,6 @@ export default function Home() {
 
   return (
     <main className="bg-bg text-fg">
-      {/* HERO: Modern, dynamic design */}
       <HomeHero />
 
       {/* KPI STRIP: denser, in a band */}
@@ -41,7 +40,7 @@ export default function Home() {
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
             {[
               { k: "100+", v: "3D assets delivered" },
-              { k: "5+ yrs", v: "combined team experience" },
+              { k: "25+ yrs", v: "combined team experience" },
               { k: "Multi-sector", v: "real estate → heritage" },
               { k: "Global", v: "HQ Addis Ababa" },
             ].map((m, i) => (

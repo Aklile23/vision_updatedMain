@@ -599,5 +599,4 @@ const HomeSolutions = () => {
       </section>
   );
 }
-
 export default HomeSolutions;
