@@ -1,10 +1,20 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Container from "../Container";
-import { motion } from "framer-motion";
+import { motion, useAnimation, useInView } from "framer-motion";
 import { NavLink } from "react-router-dom";
 
 const HomeSolutions = () => {
-    const staggerContainer = {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(cardRef, { amount: 0.3, margin: "0px 0px -10% 0px" });
+  const controls = useAnimation();
+  
+  // kick animations only when visible
+  useEffect(() => {
+    if (inView) controls.start("loop");
+    else controls.stop();
+  }, [inView, controls]);
+  
+  const staggerContainer = {
         hidden: { opacity: 0 },
         visible: {
           opacity: 1,
@@ -15,7 +25,7 @@ const HomeSolutions = () => {
         }
       };
     
-      const fadeInUp = {
+  const fadeInUp = {
         hidden: { opacity: 0, y: 24 },
         visible: { 
           opacity: 1, 
@@ -27,7 +37,7 @@ const HomeSolutions = () => {
         }
       };
 
-      const onCardMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const onCardMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const el = e.currentTarget;
         const r = el.getBoundingClientRect();
         const x = e.clientX - r.left;
@@ -47,7 +57,7 @@ const HomeSolutions = () => {
         el.style.setProperty("--py", `${y}px`);
       };
 
-      const onCardLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+  const onCardLeave = (e: React.MouseEvent<HTMLDivElement>) => {
         const el = e.currentTarget;
         el.style.setProperty("--rx", `0deg`);
         el.style.setProperty("--ry", `0deg`);
@@ -55,7 +65,7 @@ const HomeSolutions = () => {
         el.style.setProperty("--py", `-9999px`);
       };
     
-      function setAt<T extends HTMLElement>(arr: React.MutableRefObject<T[]>, index: number) {
+  function setAt<T extends HTMLElement>(arr: React.MutableRefObject<T[]>, index: number) {
         return (el: T | null): void => { if (el) arr.current[index] = el; };
       }
     
