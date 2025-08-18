@@ -556,11 +556,11 @@ const handleMouseLeave = (e: { currentTarget: any }) => {
               {/* Culture stats */}
               <div className="grid grid-cols-3 gap-4">
                 <div className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
-                  <div className="text-2xl font-bold text-white mb-1">6+</div>
+                  <div className="text-2xl font-bold text-white mb-1">25+</div>
                   <div className="text-xs text-white/60 uppercase tracking-wide">Years</div>
                 </div>
                 <div className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
-                  <div className="text-2xl font-bold text-white mb-1">20+</div>
+                  <div className="text-2xl font-bold text-white mb-1">6+</div>
                   <div className="text-xs text-white/60 uppercase tracking-wide">Projects</div>
                 </div>
                 <div className="text-center p-4 rounded-xl bg-white/5 border border-white/10">

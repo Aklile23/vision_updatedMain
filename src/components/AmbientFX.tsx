@@ -48,9 +48,11 @@ export default function AmbientFX() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
-      aria-hidden="true"
-    >
+  className="pointer-events-none fixed inset-0 -z-10 overflow-hidden
+             [mask-image:linear-gradient(to_bottom,transparent_0,transparent_96px,black_120px,black_100%)]"
+  aria-hidden="true"
+>
+
       {/* gradient blobs */}
       <div
         ref={blob1}

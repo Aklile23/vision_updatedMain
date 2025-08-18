@@ -57,33 +57,33 @@ const HomeProjects = () => {
   const projects = [
     {
       title: "Immersive Customizer",
-      desc: "Interactive finishes for real estate & warehouses.",
-      tags: ["3D", "Configurator", "WebGL"],
-      image: "/images/projects/customizer.jpg",
+      desc: "An interactive solution for real estate marketing and communication between buyers and developers. It enables buyers to view and edit the interior finishes of their future homes.",
+      tags: ["VR", "Immersive Content", "WebGL"],
+      image: "/images/Home/projects/ImmersiveCustomizer.png",
     },
     {
       title: "Aerial Photogrammetry",
-      desc: "Drone-to-3D for construction & heritage.",
+      desc: "Creation of 3D geospatial models of construction sites using drone photography. These reconstructed spaces facilitate the management of large-scale projects. ",
       tags: ["Photogrammetry", "Reality Capture"],
-      image: "/images/projects/photogrammetry.jpg",
+      image: "/images/Home/projects/Aerial Photogrammetry.png",
     },
     {
       title: "Interactive Visuals",
-      desc: "Motion replication with real-time viewer movement.",
+      desc: "A motion replication tool, where a character mimics the real-time movements of a viewer. This technology adds an engaging, immersive layer to digital experiences.",
       tags: ["XR", "Realtime"],
-      image: "/images/projects/interactive-visuals.jpg",
+      image: "/images/Home/projects/interactive-visuals.png",
     },
     {
-      title: "AR Scavenger Hunt Gadget",
-      desc: "Location-aware, gamified AR experiences.",
-      tags: ["AR", "Mobile"],
-      image: "/images/projects/ar-scavenger.jpg",
+      title: "Virtual Assistant",
+      desc: "AI Virtual Assistant, an innovative solution that promises a multi-faceted engagement. It is equipped to converse in several languages: English, French, Arabic, Chinese and more.",
+      tags: ["AI VirtualAssistant", "Conversational AI"],
+      image: "/images/Home/projects/virtualAssistant.png",
     },
     {
-      title: "BIM Coordination Dashboard",
-      desc: "Clash detection, status, and AI-assisted insights.",
-      tags: ["BIM", "AI"],
-      image: "/images/projects/bim-dashboard.jpg",
+      title: "3D Digital Billboard",
+      desc: "This technology enables customers to view the ads without the use of special glasses, Creating a vibrant and lifelike experience that simply can't be replicated with traditional 2D billboards.",
+      tags: ["NakedEye", "3D outdoor Ads"],
+      image: "/images/Home/projects/3DBillboard.png",
     },
   ];
 
@@ -157,14 +157,10 @@ const HomeProjects = () => {
                     className="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
                   />
                   {/* gradient overlays */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-bg/60 via-bg/10 to-transparent" />
+                  
                   {/* sheen on hover */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div className="absolute -inset-1 bg-gradient-to-tr from-transparent via-white/10 to-transparent rotate-6" />
-                  </div>
-                  {/* corner badge */}
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 text-xs rounded-full bg-fg/15 border border-fg/20">Case Study</span>
                   </div>
                 </div>
 
