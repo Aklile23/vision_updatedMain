@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { easeOut } from "framer-motion"
 
 export default function About() {
-  const [hoveredService, setHoveredService] = useState<string | null>(null);
+  const [, setHoveredService] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isOverCard, setIsOverCard] = useState(false);
 
@@ -117,22 +117,22 @@ const handleMouseLeave = (e: { currentTarget: any }) => {
     { 
       title: "Innovation First", 
       description: "Pushing boundaries with emerging technologies", 
-      icon: "🚀" 
+      icon: "◆" 
     },
     { 
       title: "Human-Centered", 
       description: "Technology that advances humanity", 
-      icon: "👥" 
+      icon: "◇ " 
     },
     { 
       title: "Excellence", 
       description: "Uncompromising quality in every solution", 
-      icon: "⭐" 
+      icon: "◈ " 
     },
     { 
       title: "Future-Focused", 
       description: "Building tomorrow's solutions today", 
-      icon: "🔮" 
+      icon: "✧ " 
     }
   ];
 
@@ -280,76 +280,76 @@ const handleMouseLeave = (e: { currentTarget: any }) => {
             >
               <div className="relative rounded-3xl bg-white text-black overflow-hidden border border-black/10 shadow-xl">
 
-{/* Hover accent border */}
-<div
-  className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-  style={{
-    padding: 1,
-    background:
-      "conic-gradient(from 120deg at 50% 50%, rgba(0,0,0,0.15), rgba(0,0,0,0.02), rgba(0,0,0,0.15))",
-    WebkitMask:
-      "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
-    WebkitMaskComposite: "xor",
-    maskComposite: "exclude",
-    borderRadius: "1.5rem",
-  }}
-/>
+          {/* Hover accent border */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            style={{
+              padding: 1,
+              background:
+                "conic-gradient(from 120deg at 50% 50%, rgba(0,0,0,0.15), rgba(0,0,0,0.02), rgba(0,0,0,0.15))",
+              WebkitMask:
+                "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+              WebkitMaskComposite: "xor",
+              maskComposite: "exclude",
+              borderRadius: "1.5rem",
+            }}
+          />
 
-{/* Content */}
-<div className="p-10 md:p-14">
-  {/* Eyebrow label */}
-  <div className="mb-5 flex items-center gap-4">
-    <span className="text-[11px] tracking-[0.3em] uppercase text-black/50">
-      Our Vision
-    </span>
-    <span className="h-px flex-1 bg-black/10" />
-  </div>
+          {/* Content */}
+          <div className="p-10 md:p-14">
+            {/* Eyebrow label */}
+            <div className="mb-5 flex items-center gap-4">
+              <span className="text-[11px] tracking-[0.3em] uppercase text-black/50">
+                Our Vision
+              </span>
+              <span className="h-px flex-1 bg-black/10" />
+            </div>
 
-  {/* Headline */}
-  <h2 className="text-3xl md:text-5xl lg:text-6xl leading-[1.05] font-semibold text-black">
-    Pushing Boundaries in Emerging Technology
-  </h2>
+            {/* Headline */}
+            <h2 className="text-3xl md:text-5xl lg:text-6xl leading-[1.05] font-semibold text-black">
+              Pushing Boundaries in Emerging Technology
+            </h2>
 
-  {/* Underline accent */}
-  <div className="mt-4 h-[3px] w-28 bg-black/80" />
+            {/* Underline accent */}
+            <div className="mt-4 h-[3px] w-28 bg-black/80" />
 
-  {/* Capability chips */}
-  <div className="mt-6 flex flex-wrap gap-3 text-sm">
-    <span className="px-3 py-1 rounded-full bg-black/5 text-black/70">VR</span>
-    <span className="px-3 py-1 rounded-full bg-black/5 text-black/70">AR</span>
-    <span className="px-3 py-1 rounded-full bg-black/5 text-black/70">Computer Vision</span>
-    <span className="px-3 py-1 rounded-full bg-black/5 text-black/70">AI + BIM</span>
-  </div>
+            {/* Capability chips */}
+            <div className="mt-6 flex flex-wrap gap-3 text-sm">
+              <span className="px-3 py-1 rounded-full bg-black/5 text-black/70">VR</span>
+              <span className="px-3 py-1 rounded-full bg-black/5 text-black/70">AR</span>
+              <span className="px-3 py-1 rounded-full bg-black/5 text-black/70">Computer Vision</span>
+              <span className="px-3 py-1 rounded-full bg-black/5 text-black/70">AI + BIM</span>
+            </div>
 
-  {/* Body */}
-  <div className="mt-8 space-y-6 text-lg md:text-xl text-black/70 leading-relaxed">
-    <p>
-      Founded in 2019, VisionLab was born from a vision to bridge the gap between cutting edge technology and real world applications. We saw the immense potential of emerging technologies like VR, AR, and computer vision to transform how people interact with digital experiences.
-    </p>
-    <p>
-      What started as a small team of passionate engineers in Addis Ababa has grown into a company dedicated to pushing the boundaries of what's possible. We believe technology should serve humanity, not the other way around.
-    </p>
-    <p>
-      Our journey is driven by curiosity, innovation, and the belief that the future belongs to those bold enough to build it today.
-    </p>
-  </div>
+            {/* Body */}
+            <div className="mt-8 space-y-6 text-lg md:text-xl text-black/70 leading-relaxed">
+              <p>
+                Founded in 2019, VisionLab was born from a vision to bridge the gap between cutting edge technology and real world applications. We saw the immense potential of emerging technologies like VR, AR, and computer vision to transform how people interact with digital experiences.
+              </p>
+              <p>
+                What started as a small team of passionate engineers in Addis Ababa has grown into a company dedicated to pushing the boundaries of what's possible. We believe technology should serve humanity, not the other way around.
+              </p>
+              <p>
+                Our journey is driven by curiosity, innovation, and the belief that the future belongs to those bold enough to build it today.
+              </p>
+            </div>
 
-  {/* Footer — clean */}
-  <div className="mt-10 flex items-center justify-end gap-2 text-sm text-black/50">
-    <span className="inline-block h-2 w-2 rounded-full bg-black/30" />
-    <span>Global Perspective</span>
-  </div>
-</div>
+            {/* Footer — clean */}
+            <div className="mt-10 flex items-center justify-end gap-2 text-sm text-black/50">
+              <span className="inline-block h-2 w-2 rounded-full bg-black/30" />
+              <span>Global Perspective</span>
+            </div>
+          </div>
 
-{/* Spotlight effect (still tied to tilt) */}
-<div
-  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-  style={{
-    background:
-      "radial-gradient(420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0,0,0,0.06), transparent 45%)",
-  }}
-/>
-</div>
+          {/* Spotlight effect (still tied to tilt) */}
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0,0,0,0.06), transparent 45%)",
+            }}
+          />
+          </div>
 
             </motion.div>
           </motion.div>
@@ -428,7 +428,7 @@ const handleMouseLeave = (e: { currentTarget: any }) => {
       </section>
 
       {/* Mission Section */}
-      <section className="py-24 bg-white text-black">
+      <section className="py-24 bg-black">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -448,14 +448,14 @@ const handleMouseLeave = (e: { currentTarget: any }) => {
                 ease: "linear"
               }}
             >
-              <div className="w-20 h-20 mx-auto rounded-full border-2 border-black/20 flex items-center justify-center text-3xl text-black">
+              <div className="w-20 h-20 mx-auto rounded-full border-2 border-white/20 flex items-center justify-center text-3xl text-white">
                 ✦
               </div>
             </motion.div>
 
-            <h2 className="heading text-4xl md:text-5xl mb-8 text-black">Our Mission</h2>
-            <p className="text-xl md:text-2xl text-black/70 leading-relaxed mb-12">
-              At VisionLab, we strive to create technology experiences that <strong>advance humanity</strong> and make the world <strong>smarter, better and more connected</strong>.
+            <h2 className="heading text-4xl md:text-5xl mb-8 text-white">Our Mission</h2>
+            <p className="text-xl md:text-2xl text-white/70 leading-relaxed mb-12">
+              At VisionLab, we strive to create technology experiences that <strong className="text-white">advance humanity</strong> and make the world <strong className="text-white">smarter, better and more connected</strong>.
             </p>
 
             {/* Mission Values */}
@@ -467,12 +467,25 @@ const handleMouseLeave = (e: { currentTarget: any }) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="text-center p-6 rounded-2xl bg-black/5 hover:bg-black/10 transition-all duration-300"
+                  className="group relative text-center p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
                   whileHover={{ scale: 1.05 }}
+                  onMouseMove={handleMouseMove}
+                  onMouseLeave={handleMouseLeave}
+                  style={{ transition: 'transform 0.3s ease' }}
                 >
-                  <div className="text-4xl mb-4">{value.icon}</div>
-                  <h4 className="font-semibold mb-2 text-black">{value.title}</h4>
-                  <p className="text-sm text-black/60">{value.description}</p>
+                  {/* Interactive spotlight */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
+                    style={{
+                      background: `radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 40%)`
+                    }}
+                  />
+                  
+                  <div className="relative z-10">
+                    <div className="text-4xl mb-4">{value.icon}</div>
+                    <h4 className="font-semibold mb-2 text-white group-hover:text-white/90 transition-colors">{value.title}</h4>
+                    <p className="text-sm text-white/60 group-hover:text-white/70 transition-colors">{value.description}</p>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -480,8 +493,8 @@ const handleMouseLeave = (e: { currentTarget: any }) => {
         </Container>
       </section>
 
-      {/* Team & Culture */}
-      <section className="py-24 bg-black">
+      {/* Team & Culture - Redesigned */}
+      <section className="py-24 bg-black border-t border-white/10">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -491,55 +504,191 @@ const handleMouseLeave = (e: { currentTarget: any }) => {
             className="grid lg:grid-cols-2 gap-16 items-center"
           >
             <div>
-              <h2 className="heading text-4xl md:text-5xl mb-8 text-white">Engineers & Visionaries</h2>
+              <div className="mb-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="h-px w-12 bg-gradient-to-r from-transparent to-white/40" />
+                  <span className="text-sm tracking-[0.3em] uppercase text-white/60 font-medium">
+                    Our Team
+                  </span>
+                </div>
+              </div>
+
+              <h2 className="heading text-4xl md:text-5xl mb-8 text-white leading-tight">
+                Where Innovation
+                <span className="block text-white/70">Meets Expertise</span>
+              </h2>
+              
               <p className="text-lg text-white/70 leading-relaxed mb-8">
-                Our team of experienced engineers and visionaries are passionate about pushing boundaries and exploring new applications for emerging technology. We combine technical expertise with creative vision to deliver solutions that make a real impact.
+                Our multidisciplinary team brings together deep technical expertise in emerging technologies with creative vision and real-world experience. Based in Addis Ababa, we serve clients globally with solutions that push the boundaries of what's possible.
               </p>
               
-              <div className="grid grid-cols-2 gap-6">
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                  <h4 className="font-semibold text-white mb-2">Technical Excellence</h4>
-                  <p className="text-sm text-white/60">Deep expertise in emerging technologies</p>
+              {/* Team specialties */}
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center gap-4">
+                  <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
+                    <span className="text-sm text-white">◆</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-white">3D & Immersive Tech Specialists</h4>
+                    <p className="text-sm text-white/60">VR/AR development, 3D modeling, spatial computing</p>
+                  </div>
                 </div>
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                  <h4 className="font-semibold text-white mb-2">Creative Vision</h4>
-                  <p className="text-sm text-white/60">Innovative approaches to complex challenges</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
+                    <span className="text-sm text-white">◇</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-white">AI & Computer Vision Engineers</h4>
+                    <p className="text-sm text-white/60">Machine learning, computer vision, intelligent systems</p>
+                  </div>
                 </div>
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                  <h4 className="font-semibold text-white mb-2">Global Perspective</h4>
-                  <p className="text-sm text-white/60">Serving clients worldwide from Addis Ababa</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
+                    <span className="text-sm text-white">◈</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-white">BIM & Architecture Tech</h4>
+                    <p className="text-sm text-white/60">Building information modeling, construction tech</p>
+                  </div>
                 </div>
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                  <h4 className="font-semibold text-white mb-2">Future-Ready</h4>
-                  <p className="text-sm text-white/60">Always exploring what's next in tech</p>
+              </div>
+
+              {/* Culture stats */}
+              <div className="grid grid-cols-3 gap-4">
+                <div className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
+                  <div className="text-2xl font-bold text-white mb-1">6+</div>
+                  <div className="text-xs text-white/60 uppercase tracking-wide">Years</div>
+                </div>
+                <div className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
+                  <div className="text-2xl font-bold text-white mb-1">20+</div>
+                  <div className="text-xs text-white/60 uppercase tracking-wide">Projects</div>
+                </div>
+                <div className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
+                  <div className="text-2xl font-bold text-white mb-1">Global</div>
+                  <div className="text-xs text-white/60 uppercase tracking-wide">Reach</div>
                 </div>
               </div>
             </div>
 
+            {/* Interactive visualization */}
             <motion.div
-              className="relative aspect-square rounded-3xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 overflow-hidden"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
+              className="group relative aspect-square rounded-3xl overflow-hidden"
+              data-disable-global-light
+              onMouseMove={handleMouseMove}
+              onMouseLeave={(e) => {
+                handleMouseLeave(e);
+                setIsOverCard(false);
+              }}
+              onMouseEnter={() => setIsOverCard(true)}
+              style={{ transition: 'transform 0.3s ease' }}
             >
-              <div className="absolute inset-0 flex items-center justify-center p-8">
-                <div className="grid grid-cols-3 gap-4 w-full h-full">
-                  {[...Array(9)].map((_, i) => (
+              <div className="relative h-full bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-3xl">
+                
+                {/* Hover accent border */}
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                  style={{
+                    padding: 1,
+                    background: "conic-gradient(from 120deg at 50% 50%, rgba(255,255,255,0.2), rgba(255,255,255,0.05), rgba(255,255,255,0.2))",
+                    WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
+                  }}
+                />
+
+                {/* Interactive network visualization */}
+                <div className="absolute inset-0 p-8">
+                  {/* Central node */}
+                  <motion.div
+                    className="absolute top-1/2 left-1/2 w-16 h-16 -mt-8 -ml-8 rounded-full bg-white/20 border-2 border-white/40 flex items-center justify-center"
+                    animate={{
+                      scale: [1, 1.1, 1],
+                      opacity: [0.7, 1, 0.7]
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <span className="text-white text-xl">✦</span>
+                  </motion.div>
+
+                  {/* Orbiting nodes representing team specialties */}
+                  {[
+                    { angle: 0, delay: 0, icon: "◆", label: "3D/VR" },
+                    { angle: 72, delay: 0.8, icon: "◇", label: "AI/CV" },
+                    { angle: 144, delay: 1.6, icon: "◈", label: "BIM" },
+                    { angle: 216, delay: 2.4, icon: "✧", label: "Design" },
+                    { angle: 288, delay: 3.2, icon: "◉", label: "Strategy" }
+                  ].map((node, i) => (
                     <motion.div
                       key={i}
-                      className="rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center"
+                      className="absolute w-10 h-10 rounded-full bg-white/10 border border-white/30 flex items-center justify-center text-white text-sm"
+                      style={{
+                        top: '50%',
+                        left: '50%',
+                        marginTop: '-20px',
+                        marginLeft: '-20px',
+                      }}
                       animate={{
-                        opacity: [0.4, 0.8, 0.4],
-                        scale: [1, 1.05, 1]
+                        x: [
+                          Math.cos((node.angle * Math.PI) / 180) * 80,
+                          Math.cos(((node.angle + 360) * Math.PI) / 180) * 80
+                        ],
+                        y: [
+                          Math.sin((node.angle * Math.PI) / 180) * 80,
+                          Math.sin(((node.angle + 360) * Math.PI) / 180) * 80
+                        ],
+                        scale: [1, 1.2, 1],
+                        opacity: [0.6, 1, 0.6]
                       }}
                       transition={{
-                        duration: 3 + (i * 0.5),
+                        duration: 20,
                         repeat: Infinity,
-                        delay: i * 0.2
+                        delay: node.delay,
+                        ease: "linear"
                       }}
                     >
-                      <span className="text-2xl text-white/60">👤</span>
+                      {node.icon}
                     </motion.div>
                   ))}
+
+                  {/* Connection lines */}
+                  <svg className="absolute inset-0 w-full h-full">
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <motion.line
+                        key={i}
+                        x1="50%"
+                        y1="50%"
+                        x2={`${50 + Math.cos((i * 72 * Math.PI) / 180) * 25}%`}
+                        y2={`${50 + Math.sin((i * 72 * Math.PI) / 180) * 25}%`}
+                        stroke="rgba(255,255,255,0.1)"
+                        strokeWidth="1"
+                        animate={{
+                          opacity: [0.1, 0.3, 0.1]
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          delay: i * 0.6
+                        }}
+                      />
+                    ))}
+                  </svg>
+                </div>
+
+                {/* Spotlight effect */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-3xl"
+                  style={{
+                    background: `radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 40%)`
+                  }}
+                />
+
+                {/* Label */}
+                <div className="absolute bottom-6 left-6 right-6 text-center">
+                  <p className="text-sm text-white/60">Collaborative Innovation Network</p>
                 </div>
               </div>
             </motion.div>
