@@ -206,7 +206,7 @@ const HomeSolutions = () => {
                     <motion.div className="flex gap-4 pt-4">
                       <NavLink 
                         to="/solutions" 
-                        className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-fg text-bg font-medium hover:bg-fg/90 hover:shadow-lg transition-all duration-300"
+                        className="relative z-10 group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-fg text-bg font-medium hover:bg-fg/90 hover:shadow-lg transition-all duration-300"
                       >
                         Learn More
                         <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -215,7 +215,7 @@ const HomeSolutions = () => {
                       </NavLink>
                       <NavLink 
                         to="/projects" 
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-fg/20 text-fg hover:border-fg/40 hover:bg-fg/5 transition-all duration-300"
+                        className="relative z-10 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-fg/20 text-fg hover:border-fg/40 hover:bg-fg/5 transition-all duration-300"
                       >
                         See Examples
                       </NavLink>

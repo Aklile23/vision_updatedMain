@@ -80,9 +80,9 @@ const HomeHero = () => {
               {/* Badge with glassmorphism */}
               <motion.div variants={fadeInUp}>
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-fg/5 border border-fg/20 backdrop-blur-sm">
-                  <div className="w-2 h-2 bg-fg/60 rounded-full animate-pulse" />
+                  <div className="w-2 h-2 bg-green-600 rounded-full animate-pulse" />
                   <span className="text-sm font-medium text-fg/80">
-                    Since 2019 • Addis Ababa
+                    Since 2019 
                   </span>
                 </div>
               </motion.div>

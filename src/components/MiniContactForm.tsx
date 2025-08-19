@@ -122,7 +122,7 @@ export default function MiniContactForm() {
               </p>
 
               <ul className="mt-6 space-y-2 text-sm">
-                <li className="flex items-center gap-2">
+                <li className="flex items-center gap-2 mt-56">
                   <Mail className="h-4 w-4 opacity-70" />
                   We usually respond within one business day.
                 </li>
