@@ -30,7 +30,7 @@ const ProjectsHero = () => {
           }
         };
     return (
-        <section ref={heroRef} className="relative min-h-screen flex items-center border-b border-fg/10 lg:py-46">
+        <section ref={heroRef} className="relative min-h-screen flex items-center border-b border-fg/10 lg:py-46 py-45">
             {/* Animated Background */}
             <div className="absolute inset-0 opacity-[0.02]">
             <motion.div 
