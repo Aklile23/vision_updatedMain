@@ -174,7 +174,7 @@ export default function Solutions() {
         }}
       />
       {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center border-b border-white/10 lg:py-46 py-45">
+      <section ref={heroRef} className="relative min-h-screen flex items-center border-b border-white/10 lg:py-46 py-35">
         {/* Animated Background */}
         <div className="absolute inset-0 opacity-[0.03]">
           <motion.div 
