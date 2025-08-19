@@ -129,7 +129,9 @@ const HomeAbout = () => {
                         <motion.div 
                         key={item.period}
                         ref={timelineRef}
-                        className={`relative flex items-center ${item.side === 'right' ? 'flex-row-reverse' : ''}`}
+                        className={`relative flex flex-col md:flex-row items-center 
+                            ${item.side === 'right' ? 'md:flex-row-reverse' : ''}`}
+                          
                         style={{ scale, opacity }}
                         >
                         {/* Interactive timeline node */}
