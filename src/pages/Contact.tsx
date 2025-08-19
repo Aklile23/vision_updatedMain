@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
   Mail, User, Building2, MessageSquareText, Phone, MapPin, Clock3,
-  Send, CheckCircle2, Link2, Shield, ArrowRight, Sparkles,
+  Send, CheckCircle2, Link2, ArrowRight, Sparkles,
   Copy, Check, ExternalLink
 } from "lucide-react";
+import emailjs from '@emailjs/browser';
 
 
 // Mock Container component
@@ -28,7 +29,7 @@ interface FormData {
   company: string;
   topic: Topic | "";
   message: string;
-  agree: boolean;
+  // agree: boolean;
 }
 
 type FormErrors = Partial<Record<keyof FormData, string>>;
@@ -38,10 +39,10 @@ const validateForm = (data: FormData): FormErrors => {
   const errors: FormErrors = {};
   if (!data.name || data.name.trim().length < 2) errors.name = "Please enter your full name";
   if (!data.email || !data.email.includes("@")) errors.email = "Enter a valid email address";
-  if (!data.topic) errors.topic = "Please select a topic";
-  if (!data.message || data.message.trim().length < 12) errors.message = "Tell us a little more (min 12 characters)";
+  // if (!data.topic) errors.topic = "Please select a topic";
+  // if (!data.message || data.message.trim().length < 12) errors.message = "Tell us a little more (min 12 characters)";
   if (data.message && data.message.length > 1200) errors.message = "Please keep it under 1200 characters";
-  if (!data.agree) errors.agree = "Please agree to be contacted";
+  // if (!data.agree) errors.agree = "Please agree to be contacted";
   return errors;
 };
 
@@ -54,7 +55,7 @@ export default function Contact() {
     company: "",
     topic: "",
     message: "",
-    agree: false,
+    // agree: false,
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [focusedField, setFocusedField] = useState<keyof FormData | null>(null);
@@ -80,7 +81,7 @@ export default function Contact() {
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
-
+  
   const messageChars = formData.message.length;
   const messageLimit = 1200;
 
@@ -101,18 +102,38 @@ export default function Contact() {
     }
 
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((r) => setTimeout(r, 1500));
-    setSubmitted(true);
-    setIsSubmitting(false);
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      topic: "",
-      message: "",
-      agree: false,
+    
+    try{
+      const serviceId = import.meta.env?.VITE_EMAILJS_SERVICE_ID
+      const templateId = import.meta.env?.VITE_EMAILJS_TEMPLATE_ID
+      const publicKey = import.meta.env?.VITE_EMAILJS_PUBLIC_KEY 
+
+      const templateParams = {
+        name: formData.name,
+        email: formData.email,
+        company: formData.company || 'Not specified',
+        topic: formData.topic || 'Not specified',
+        message: formData.message,
+        to_name: 'Development Team', 
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      setSubmitted(true);
+      setIsSubmitting(false);
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        topic: "",
+        message: "",
+        // agree: false,
     });
+    }catch (error) {
+      console.error('EmailJS Error:', error);
+      // setStatus("error");
+    } finally {
+      // setTimeout(() => setStatus("idle"), 3000);
+    }
   };
 
   const resetForm = () => {
@@ -344,7 +365,7 @@ export default function Contact() {
                             </AnimatedField>
 
                             <AnimatedField
-                              label="Topic"
+                              label="Topic (optional)"
                               icon={<Link2 className="h-4 w-4" />}
                               error={errors.topic}
                               focused={focusedField === "topic"}
@@ -380,7 +401,7 @@ export default function Contact() {
                               onFocus={() => setFocusedField("message")}
                               onBlur={() => setFocusedField(null)}
                               className="w-full resize-none rounded-xl border-2 border-black/10 bg-white/50 px-4 py-3 backdrop-blur-sm transition-all duration-300 focus:border-black focus:bg-white focus:shadow-lg focus:outline-none"
-                              placeholder="Briefly describe your goals, timeline, and any constraints."
+                              placeholder="How can we help?"
                             />
                             <div className="mt-2 flex justify-between items-center text-xs">
                               <div className={`transition-colors ${messageChars > messageLimit * 0.8 ? "text-red-500" : "text-gray-500"}`}>
@@ -400,7 +421,7 @@ export default function Contact() {
                           </AnimatedField>
 
                           {/* Consent checkbox */}
-                          <div className="flex items-start gap-4 p-4 rounded-xl bg-black/[0.02] border border-black/5">
+                          {/* <div className="flex items-start gap-4 p-4 rounded-xl bg-black/[0.02] border border-black/5">
                             <input
                               type="checkbox"
                               checked={formData.agree}
@@ -420,7 +441,7 @@ export default function Contact() {
                               <span className="w-1 h-1 bg-red-600 rounded-full" />
                               {errors.agree}
                             </div>
-                          )}
+                          )} */}
 
                           {/* Submit button */}
                           <div className="pt-4">
@@ -491,7 +512,7 @@ export default function Contact() {
                       <ContactRow
                         icon={<Clock3 className="h-4 w-4" />}
                         label="Hours"
-                        value="Mon—Fri · 9:00—18:00 EAT"
+                        value="Mon—Sat · 9:00—18:00 EAT"
                         copy={false}
                       />
                     </ul>

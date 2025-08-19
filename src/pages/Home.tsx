@@ -5,7 +5,7 @@ import HomeSolutions from "../components/Home Components/HomeSolutions";
 import HomeProjects from "../components/Home Components/HomeProjects";
 import HomeAbout from "../components/Home Components/HomeAbout";
 import HomeHero from "../components/Home Components/HomeHero";
-import HomeTestimonials from "../components/Home Components/HomeTestimonials";
+// import HomeTestimonials from "../components/Home Components/HomeTestimonials";
 import MiniContactForm from "../components/MiniContactForm";
 
 
@@ -101,7 +101,7 @@ export default function Home() {
         </Container>
       </section> */}
 
-      <HomeTestimonials />
+      {/* <HomeTestimonials /> */}
       <MiniContactForm />
     </main>
   );

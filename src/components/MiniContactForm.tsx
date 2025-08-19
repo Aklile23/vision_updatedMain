@@ -1,7 +1,7 @@
-// MiniContactForm.tsx
 import React, { useState } from "react";
 import Container from "../components/Container";
 import { motion, type Variants } from "framer-motion";
+import emailjs from '@emailjs/browser';
 import {
   Mail,
   User,
@@ -57,21 +57,35 @@ export default function MiniContactForm() {
   );
   const [focused, setFocused] = useState<keyof MiniFormData | null>(null);
 
-  // ambient floaters
-
   const handle = <K extends keyof MiniFormData>(k: K, v: MiniFormData[K]) =>
     setForm((p) => ({ ...p, [k]: v }));
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) return;
+    
     setStatus("loading");
+    
     try {
-      // Hook up to your API here
-      await new Promise((r) => setTimeout(r, 900));
+      const serviceId = import.meta.env?.VITE_EMAILJS_SERVICE_ID
+      const templateId = import.meta.env?.VITE_EMAILJS_TEMPLATE_ID
+      const publicKey = import.meta.env?.VITE_EMAILJS_PUBLIC_KEY 
+
+      // Template parameters that will be sent to EmailJS
+      const templateParams = {
+        name: form.name,
+        email: form.email,
+        topic: form.topic || 'Not specified',
+        message: form.message,
+        to_name: 'Development Team', 
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      
       setStatus("success");
       setForm({ name: "", email: "", topic: "", message: "" });
-    } catch {
+    } catch (error) {
+      console.error('EmailJS Error:', error);
       setStatus("error");
     } finally {
       setTimeout(() => setStatus("idle"), 3000);
@@ -100,14 +114,14 @@ export default function MiniContactForm() {
                 Collaborate with us
               </div>
               <h3 className="heading text-2xl md:text-3xl mt-4">
-                Let’s make something brilliant together.
+                Let's make something brilliant together.
               </h3>
               <p className="mt-3 text-fg/70">
-                Share a few details about your goals. We’ll reply with next
+                Share a few details about your goals. We'll reply with next
                 steps and a practical path forward.
               </p>
 
-              <ul className="mt-56 space-y-2 text-sm">
+              <ul className="mt-6 space-y-2 text-sm">
                 <li className="flex items-center gap-2">
                   <Mail className="h-4 w-4 opacity-70" />
                   We usually respond within one business day.
@@ -216,7 +230,7 @@ export default function MiniContactForm() {
                 {status === "success" && (
                   <div className="flex items-center gap-3 rounded-2xl border border-fg/15 bg-fg/5 p-3 text-sm">
                     <CheckCircle2 className="h-5 w-5 text-green-500" />
-                    Message sent — we’ll be in touch shortly.
+                    Message sent — we'll be in touch shortly.
                   </div>
                 )}
                 {status === "error" && (
@@ -229,11 +243,6 @@ export default function MiniContactForm() {
           </motion.div>
         </motion.div>
       </Container>
-
-      {/* local keyframes */}
-      <style>{`
-        @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
-      `}</style>
     </section>
   );
 }
@@ -285,7 +294,19 @@ function FloatingInput({
   placeholder: string;
   type?: string;
 }) {
-  const active = !!value;
+  const [isFocused, setIsFocused] = useState(false);
+  const isActive = isFocused || !!value;
+  
+  const handleFocus = () => {
+    setIsFocused(true);
+    onFocus();
+  };
+  
+  const handleBlur = () => {
+    setIsFocused(false);
+    onBlur();
+  };
+
   return (
     <div className="relative">
       <input
@@ -293,18 +314,17 @@ function FloatingInput({
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         required
         className="peer w-full rounded-xl border-2 border-fg/15 bg-bg/60 px-4 pt-6 pb-2 backdrop-blur-sm outline-none transition-all focus:border-fg focus:bg-bg"
-        placeholder=" "
       />
       <span
-        className={[
-          "pointer-events-none absolute left-4 top-3 text-sm text-fg/50 transition-all",
-          "peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-[11px] peer-focus:text-fg/80",
-          active ? "-top-2 text-[11px] text-fg/80" : "",
-        ].join(" ")}
+        className={`pointer-events-none absolute left-4 text-fg/50 transition-all duration-200 ease-out ${
+          isActive
+            ? "top-1.5 text-[11px] text-fg/80"
+            : "top-3.5 text-sm"
+        }`}
       >
         {placeholder}
       </span>
@@ -329,7 +349,19 @@ function FloatingTextarea({
   placeholder: string;
   rows?: number;
 }) {
-  const active = !!value;
+  const [isFocused, setIsFocused] = useState(false);
+  const isActive = isFocused || !!value;
+  
+  const handleFocus = () => {
+    setIsFocused(true);
+    onFocus();
+  };
+  
+  const handleBlur = () => {
+    setIsFocused(false);
+    onBlur();
+  };
+
   return (
     <div className="relative">
       <textarea
@@ -337,18 +369,17 @@ function FloatingTextarea({
         rows={rows}
         value={value}
         onChange={(e) => onChange(e.target.value.slice(0, 600))}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         required
         className="peer w-full resize-none rounded-xl border-2 border-fg/15 bg-bg/60 px-4 pt-6 pb-3 backdrop-blur-sm outline-none transition-all focus:border-fg focus:bg-bg"
-        placeholder=" "
       />
       <span
-        className={[
-          "pointer-events-none absolute left-4 top-3 text-sm text-fg/50 transition-all",
-          "peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-[11px] peer-focus:text-fg/80",
-          active ? "-top-2 text-[11px] text-fg/80" : "",
-        ].join(" ")}
+        className={`pointer-events-none absolute left-4 text-fg/50 transition-all duration-200 ease-out ${
+          isActive
+            ? "top-1.5 text-[11px] text-fg/80"
+            : "top-3.5 text-sm"
+        }`}
       >
         {placeholder}
       </span>
