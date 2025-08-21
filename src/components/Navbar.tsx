@@ -165,43 +165,45 @@ export default function Navbar() {
               </NavLink>
             </nav>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button — fixed hamburger + full X */}
             <motion.button
               className="md:hidden p-2 rounded-xl transition-colors duration-300 relative"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle mobile menu"
             >
-              <div className="w-6 h-6 flex flex-col justify-center items-center">
+              <div className="relative w-6 h-6 overflow-visible flex items-center justify-center">
+                {/* Top bar */}
                 <motion.span
-                  className={`block h-0.5 w-6 rounded-full transition-all duration-300 ${
+                  className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block h-0.5 w-8 rounded-full ${
                     scrolled ? "bg-bg" : "bg-fg"
                   }`}
                   animate={{
                     rotate: mobileMenuOpen ? 45 : 0,
-                    y: mobileMenuOpen ? 6 : 0,
+                    y: mobileMenuOpen ? 0 : -6,        // hamburger offset
                   }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.25 }}
                 />
+                {/* Middle bar */}
                 <motion.span
-                  className={`block h-0.5 w-6 rounded-full mt-1.5 transition-all duration-300 ${
+                  className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block h-0.5 w-8 rounded-full ${
                     scrolled ? "bg-bg" : "bg-fg"
                   }`}
                   animate={{
-                    opacity: mobileMenuOpen ? 0 : 1,
-                    x: mobileMenuOpen ? 20 : 0,
+                    opacity: mobileMenuOpen ? 0 : 1,   // fades out on open
                   }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.2 }}
                 />
+                {/* Bottom bar */}
                 <motion.span
-                  className={`block h-0.5 w-6 rounded-full mt-1.5 transition-all duration-300 ${
+                  className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block h-0.5 w-8 rounded-full ${
                     scrolled ? "bg-bg" : "bg-fg"
                   }`}
                   animate={{
                     rotate: mobileMenuOpen ? -45 : 0,
-                    y: mobileMenuOpen ? -6 : 0,
+                    y: mobileMenuOpen ? 0 : 6,         // hamburger offset
                   }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.25 }}
                 />
               </div>
             </motion.button>
