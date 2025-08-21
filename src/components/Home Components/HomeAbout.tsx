@@ -46,7 +46,7 @@ const HomeAbout = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-10%" }}
             >
-            {/* Header — simple, engineering-forward */}
+            {/* Header â€" simple, engineering-forward */}
             <motion.div className="text-center mb-16" variants={fadeInUp}>
             {/* Eyebrow (keep) */}
             <div className="mb-4 flex items-center justify-center gap-3">
@@ -76,19 +76,82 @@ const HomeAbout = () => {
                 </div>
 
                 <div className="relative min-h-[600px]" ref={heroRef}>
-                {/* Scroll-reactive timeline line */}
-                <motion.div 
-                    className="absolute left-1/2 transform -translate-x-px top-0 w-px bg-gradient-to-b from-fg/10 via-fg/40 to-fg/10"
+                {/* Desktop timeline line */}
+                <motion.div
+                    className="hidden md:block absolute left-1/2 -translate-x-px top-0 w-px bg-gradient-to-b from-fg/10 via-fg/40 to-fg/10"
                     style={{
-                    height: useTransform(
+                        height: useTransform(
                         useScroll({ target: heroRef, offset: ["start end", "end start"] }).scrollYProgress,
                         [0, 1],
                         ["20%", "100%"]
-                    )
+                        )
                     }}
                 />
                 
-                <div className="space-y-12">
+                {/* Mobile flowing timeline background */}
+                <div className="md:hidden absolute inset-0 overflow-hidden">
+                    <motion.div
+                        className="absolute left-0 top-0 w-full h-full"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 1 }}
+                    >
+                        {/* Animated flowing lines */}
+                        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 600">
+                            <defs>
+                                <linearGradient id="flowGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stopColor="currentColor" stopOpacity="0.1" />
+                                    <stop offset="50%" stopColor="currentColor" stopOpacity="0.3" />
+                                    <stop offset="100%" stopColor="currentColor" stopOpacity="0.1" />
+                                </linearGradient>
+                            </defs>
+                            <motion.path
+                                d="M20 50 Q30 100 25 150 Q20 200 30 250 Q40 300 25 350 Q10 400 25 450 Q40 500 30 550"
+                                stroke="url(#flowGradient)"
+                                strokeWidth="2"
+                                fill="none"
+                                className="text-fg"
+                                initial={{ pathLength: 0, opacity: 0 }}
+                                whileInView={{ pathLength: 1, opacity: 1 }}
+                                transition={{ duration: 2, ease: "easeInOut" }}
+                            />
+                            <motion.path
+                                d="M40 80 Q50 130 45 180 Q40 230 50 280 Q60 330 45 380 Q30 430 45 480 Q60 530 50 580"
+                                stroke="url(#flowGradient)"
+                                strokeWidth="1"
+                                fill="none"
+                                className="text-fg"
+                                initial={{ pathLength: 0, opacity: 0 }}
+                                whileInView={{ pathLength: 1, opacity: 0.6 }}
+                                transition={{ duration: 2.5, delay: 0.3, ease: "easeInOut" }}
+                            />
+                        </svg>
+                        
+                        {/* Floating particles */}
+                        {[...Array(6)].map((_, i) => (
+                            <motion.div
+                                key={i}
+                                className="absolute w-1 h-1 bg-fg/40 rounded-full"
+                                style={{
+                                    left: `${15 + Math.random() * 30}%`,
+                                    top: `${10 + i * 15}%`,
+                                }}
+                                animate={{
+                                    y: [0, -10, 0],
+                                    opacity: [0.2, 0.6, 0.2],
+                                    scale: [0.5, 1, 0.5]
+                                }}
+                                transition={{
+                                    duration: 3 + Math.random() * 2,
+                                    repeat: Infinity,
+                                    delay: i * 0.5,
+                                    ease: "easeInOut"
+                                }}
+                            />
+                        ))}
+                    </motion.div>
+                </div>
+                <div className="space-y-8 md:space-y-12 relative z-10">
                     {[
                     {
                         period: "2019 - Foundation",
@@ -96,7 +159,9 @@ const HomeAbout = () => {
                         content: "Started with cutting-edge VR and AR solutions, establishing our foundation in immersive digital experiences and interactive content creation.",
                         side: "left",
                         highlight: "VR/AR Focus",
-                        progress: 0.2
+                        progress: 0.2,
+                        color: "from-blue-500/20 to-purple-500/20",
+                        icon: ""
                     },
                     {
                         period: "2020-2022 - Expansion",
@@ -104,7 +169,9 @@ const HomeAbout = () => {
                         content: "Expanded into Building Information Modeling, combining our visual expertise with precise construction workflows and data-rich modeling.",
                         side: "right",
                         highlight: "BIM Systems",
-                        progress: 0.5
+                        progress: 0.5,
+                        color: "from-green-500/20 to-emerald-500/20",
+                        
                     },
                     {
                         period: "2023-Present - Intelligence",
@@ -112,9 +179,11 @@ const HomeAbout = () => {
                         content: "Leading with AI-driven automation, predictive analytics, and intelligent systems while offering specialized outsourcing services to global clients.",
                         side: "left",
                         highlight: "AI-Powered",
-                        progress: 0.8
+                        progress: 0.8,
+                        color: "from-orange-500/20 to-red-500/20",
+                        
                     }
-                    ].map((item,) => {
+                    ].map((item, index) => {
                     const timelineRef = useRef<HTMLDivElement>(null);
                     const { scrollYProgress } = useScroll({
                         target: timelineRef,
@@ -129,14 +198,17 @@ const HomeAbout = () => {
                         <motion.div 
                         key={item.period}
                         ref={timelineRef}
-                        className={`relative flex flex-col md:flex-row items-center 
+                        className={`relative
+                            md:flex md:items-center md:gap-6
                             ${item.side === 'right' ? 'md:flex-row-reverse' : ''}`}
-                          
-                        style={{ scale, opacity }}
+                        style={{ 
+                            scale: window.innerWidth >= 768 ? scale : 1, 
+                            opacity: window.innerWidth >= 768 ? opacity : 1
+                        }}
                         >
-                        {/* Interactive timeline node */}
+                        {/* Desktop timeline node */}
                         <motion.div 
-                            className="absolute left-1/2 transform -translate-x-1/2 z-10"
+                            className="hidden md:block absolute left-1/2 -translate-x-1/2 z-10"
                             style={{ scale: nodeScale }}
                         >
                             <div className="w-6 h-6 rounded-full border-2 border-fg/30 bg-bg relative">
@@ -146,7 +218,6 @@ const HomeAbout = () => {
                                 opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 1, 0.6])
                                 }}
                             />
-                            {/* Pulse effect */}
                             <motion.div 
                                 className="absolute -inset-2 rounded-full border border-fg/20"
                                 style={{
@@ -157,27 +228,72 @@ const HomeAbout = () => {
                             </div>
                         </motion.div>
 
-                        {/* Content card with scroll interactions */}
-                        <motion.div 
-                            className={`w-5/12 p-6 rounded-2xl border border-fg/10 bg-bg/60 backdrop-blur-sm group hover:border-fg/30 hover:bg-bg/80 transition-all duration-300 ${item.side === 'right' ? 'ml-auto' : 'mr-auto'}`}
-                            whileHover={{ 
-                            y: -5,
-                            transition: { duration: 0.2 } 
+                        {/* Mobile timeline card with enhanced design */}
+                        <motion.div
+                            className={`w-full md:w-5/12 ${item.side === 'right' ? 'md:ml-auto' : 'md:mr-auto'}`}
+                            initial={{ 
+                                x: window.innerWidth < 768 ? (index % 2 === 0 ? -100 : 100) : 0, 
+                                opacity: 0,
+                                scale: 0.8
                             }}
+                            whileInView={{ 
+                                x: 0, 
+                                opacity: 1,
+                                scale: 1,
+                                transition: { 
+                                    delay: index * 0.2,
+                                    duration: 0.8,
+                                    ease: [0.23, 1, 0.32, 1],
+                                    type: "spring",
+                                    stiffness: 100
+                                }
+                            }}
+                            viewport={{ once: true, margin: "-20%" }}
+                            whileHover={{
+                                y: -5,
+                                scale: 1.02,
+                                transition: { duration: 0.3 }
+                            }}
+                            
                         >
-                            <div className="flex items-center gap-2 mb-2">
-                            <span className="text-xs font-medium text-fg/60 tracking-wide">{item.period}</span>
-                            <motion.span 
-                                className="text-xs px-2 py-1 rounded-full bg-fg/10 text-fg/70"
-                                style={{
-                                backgroundColor: useTransform(scrollYProgress, [0.3, 0.7], ["rgba(var(--color-fg-rgb), 0.1)", "rgba(var(--color-fg-rgb), 0.2)"])
-                                }}
-                            >
-                                {item.highlight}
-                            </motion.span>
+                            {/* Mobile glowing background */}
+                            <div className={`md:hidden absolute inset-0 rounded-2xl bg-gradient-to-br ${item.color} blur-xl opacity-50`} />
+                            
+                            <div className="relative p-6 rounded-2xl border border-fg/10 bg-bg/80 backdrop-blur-sm group hover:border-fg/30 hover:bg-bg/90 transition-all duration-300 overflow-hidden">
+
+                                {/* Mobile progress indicator */}
+                                <div className="md:hidden absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-fg/20 via-fg/60 to-fg/20 rounded-l-2xl">
+                                    <motion.div 
+                                        className="w-full bg-fg rounded-l-2xl"
+                                        initial={{ height: "0%" }}
+                                        whileInView={{ height: `${item.progress * 100}%` }}
+                                        transition={{ delay: index * 0.3, duration: 1.5, ease: "easeOut" }}
+                                    />
+                                </div>
+
+                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-3 pl-4 md:pl-0">
+                                    <span className="text-xs font-medium text-fg/60 tracking-wide">{item.period}</span>
+                                </div>
+                                
+                                <h4 className="text-lg font-semibold mb-3 group-hover:text-fg transition-colors pl-4 md:pl-0">
+                                    <span className="md:hidden mr-2">{item.icon}</span>
+                                    {item.title}
+                                </h4>
+                                
+                                <p className="text-sm text-fg/70 leading-relaxed group-hover:text-fg/90 transition-colors pl-4 md:pl-0">
+                                    {item.content}
+                                </p>
+
+                                {/* Mobile connecting line to next item */}
+                                {index < 2 && (
+                                    <motion.div 
+                                        className="md:hidden absolute -bottom-4 left-1/2 -translate-x-1/2 w-px h-8 bg-gradient-to-b from-fg/40 to-transparent"
+                                        initial={{ scaleY: 0 }}
+                                        whileInView={{ scaleY: 1 }}
+                                        transition={{ delay: 0.5 + index * 0.2, duration: 0.8 }}
+                                    />
+                                )}
                             </div>
-                            <h4 className="text-lg font-semibold mb-2 group-hover:text-fg transition-colors">{item.title}</h4>
-                            <p className="text-sm text-fg/70 leading-relaxed group-hover:text-fg/90 transition-colors">{item.content}</p>
                         </motion.div>
                         </motion.div>
                     );
