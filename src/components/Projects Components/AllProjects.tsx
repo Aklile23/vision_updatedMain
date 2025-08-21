@@ -13,14 +13,16 @@ const AllProjects = () => {
         {
           id: 1,
           title: "Immersive Customizer",
-          subtitle: "Interactive Real Estate Solutions",
+          subtitle: "Standalone and Web based VR Solution",
           description: "Development of an interactive solution for real estate marketing and communication between buyers and developers. This tool enables buyers to view and edit the interior finishes of their future homes interactively, enhancing decision-making and satisfaction. The solution has also been successfully applied in warehouse customization projects.",
           tags: ["3D Visualization", "Real Estate", "Interactive"],
           category: "Immersive 3D",
           featured: true,
           technologies: ["WebGL", "React", "Three.js", "UI/UX"],
           impact: "Enhanced buyer satisfaction & reduced decision time",
-          visual: "customizer"
+          visual: "customizer",
+          image: "/images/projects/ImmersiveCustomizer/1.png",
+          status: "Done" 
         },
         {
           id: 2,
@@ -32,7 +34,9 @@ const AllProjects = () => {
           featured: true,
           technologies: ["Drone Technology", "Point Clouds", "3D Reconstruction"],
           impact: "Accurate site documentation & heritage preservation",
-          visual: "photogrammetry"
+          visual: "photogrammetry",
+          image: "/images/projects/AerialPhotogrammetry/1.png",
+          status: "Done" 
         },
         {
           id: 3,
@@ -44,22 +48,12 @@ const AllProjects = () => {
           featured: false,
           technologies: ["Computer Vision", "WebRTC", "Animation"],
           impact: "Immersive user engagement & interaction",
-          visual: "motion"
+          visual: "motion",
+          image: "/images/projects/InteractiveVisuals/4.png",
+          status: "Done" 
         },
         {
           id: 4,
-          title: "AR Scavenger Hunt Gadget",
-          subtitle: "Location-Based AR Experiences",
-          description: "An innovative AR-based scavenger hunting solution that enhances entertainment and engagement through interactive digital experiences.",
-          tags: ["AR", "Mobile", "Gaming"],
-          category: "Augmented Reality",
-          featured: false,
-          technologies: ["ARCore", "GPS", "Mobile Development"],
-          impact: "Enhanced engagement through gamification",
-          visual: "ar-hunt"
-        },
-        {
-          id: 5,
           title: "Virtual Assistant",
           subtitle: "Localized AI Intelligence",
           description: "Development of an interactive virtual assistant trained to provide accurate, localized information, catering to specific user needs and enhancing accessibility.",
@@ -68,7 +62,23 @@ const AllProjects = () => {
           featured: true,
           technologies: ["Machine Learning", "NLP", "Voice Recognition"],
           impact: "Improved accessibility & user experience",
-          visual: "ai-assistant"
+          visual: "ai-assistant",
+          image: "/images/projects/VirtualAssistant/2.png",
+          status: "Done" 
+        },
+        {
+          id: 5,
+          title: "AR Scavenger Hunt Gadget",
+          subtitle: "Location-Based AR Experiences",
+          description: "An innovative AR-based scavenger hunting solution that enhances entertainment and engagement through interactive digital experiences.",
+          tags: ["AR", "Mobile", "Gaming"],
+          category: "Augmented Reality",
+          featured: false,
+          technologies: ["ARCore", "GPS", "Mobile Development"],
+          impact: "Enhanced engagement through gamification",
+          visual: "ar-hunt",
+          image: "/images/projects/ComingSoon/ComingSoon.png",
+          status: "Soon" 
         },
         {
           id: 6,
@@ -80,7 +90,9 @@ const AllProjects = () => {
           featured: false,
           technologies: ["RPA", "API Integration", "Data Analytics"],
           impact: "Reduced manual work & increased efficiency",
-          visual: "automation"
+          visual: "automation",
+          image: "/images/projects/ComingSoon/ComingSoon.png",
+          status: "Soon" 
         }
       ];
     
@@ -169,7 +181,9 @@ const AllProjects = () => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 layout
-                className="group relative overflow-hidden rounded-3xl border border-fg/10 bg-bg hover:border-fg/25 transition-all duration-500"
+                className="group relative overflow-hidden rounded-3xl border border-fg/10 bg-bg hover:border-fg/25 transition-all duration-500 
+                          shadow-[0_8px_20px_rgba(0,0,0,0.1)]
+                          hover:shadow-[0_12px_30px_rgba(0,0,0,0.15)]"
                 onHoverStart={() => setHoveredProject(project.id)}
                 onHoverEnd={() => setHoveredProject(null)}
                 onMouseMove={handleMouseMove}
@@ -187,28 +201,23 @@ const AllProjects = () => {
                 {/* Project Image/Visual */}
                 <div className="relative aspect-[16/10] bg-gradient-to-br from-fg/5 to-fg/10 overflow-hidden">
                   <div className="absolute inset-0 flex items-center justify-center p-8">
-                    {/* Simple visual representation */}
-                    <motion.div 
-                      className={`w-20 h-20 rounded-2xl border-2 border-fg/20 flex items-center justify-center text-2xl bg-fg/10`}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                    >
-                      {project.category === "Immersive 3D" && "🎯"}
-                      {project.category === "Data Capture" && "📐"}
-                      {project.category === "Augmented Reality" && "🥽"}
-                      {project.category === "AI Solutions" && "🤖"}
-                    </motion.div>
                   </div>
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
 
                   {/* Category Badge */}
                   <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 text-xs rounded-full bg-fg/15 border border-fg/20 font-medium">
+                    <span className="px-3 py-1 text-xs rounded-full bg-fg/45 border border-fg/20 font-medium text-white">
                       {project.category}
                     </span>
                   </div>
 
                   {/* Project Number */}
                   <div className="absolute top-4 right-4">
-                    <span className="text-2xl font-mono text-fg/20">
+                    <span className="text-2xl font-mono text-fg/40">
                       {String(project.id).padStart(2, '0')}
                     </span>
                   </div>
@@ -226,29 +235,36 @@ const AllProjects = () => {
                     </p>
                   </div>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 text-xs font-medium rounded-full bg-fg/10 text-fg/70 border border-fg/15"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
                   {/* CTA */}
                   <div className="flex gap-3">
-                    <NavLink 
-                      to="/contact" 
-                      className="flex-1 text-center px-4 py-2 rounded-full bg-fg/10 text-fg hover:bg-fg hover:text-bg transition-all duration-300 text-sm font-medium"
-                    >
-                      Discuss
-                    </NavLink>
-                    <button className="px-4 py-2 rounded-full border border-fg/20 text-fg hover:border-fg/40 hover:bg-fg/5 transition-all duration-300 text-sm">
-                      Details
-                    </button>
+                    {project.status === "Done" ? (
+                      <>
+                        <NavLink 
+                          to="/contact" 
+                          className="flex-1 text-center px-4 py-2 rounded-full bg-fg/10 text-fg hover:bg-fg hover:text-bg transition-all duration-300 text-sm font-medium"
+                        >
+                          Discuss
+                        </NavLink>
+                        <button className="px-4 py-2 rounded-full border border-fg/20 text-fg hover:border-fg/40 hover:bg-fg/5 transition-all duration-300 text-sm">
+                          Details
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <NavLink 
+                          to="/contact" 
+                          className="flex-1 text-center px-4 py-2 rounded-full bg-fg/10 text-fg hover:bg-fg hover:text-bg transition-all duration-300 text-sm font-medium"
+                        >
+                          Discuss
+                        </NavLink>
+                        <button 
+                          disabled 
+                          className="px-4 py-2 rounded-full border border-fg/20 text-fg/40 cursor-not-allowed text-sm"
+                        >
+                          Details
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               </motion.article>

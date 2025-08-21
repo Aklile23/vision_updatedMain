@@ -170,7 +170,7 @@ const HomeProjects = () => {
             </div>
             <h2 className="heading text-4xl md:text-5xl mb-4">Featured Projects</h2>
             <p className="text-lg md:text-xl text-fg/70 max-w-3xl mx-auto">
-              A snapshot of how we apply 3D, BIM, and AI to real problems — crafted with precision, built to scale.
+              A snapshot of how we apply 3D, BIM, and AI to real problems, crafted with precision, built to scale.
             </p>
           </motion.div>
 

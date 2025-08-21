@@ -121,8 +121,6 @@ const HomeAbout = () => {
 
 export default HomeAbout;
 
-/* --------------------------- Extracted pieces --------------------------- */
-
 const DesktopTimelineLine = ({ targetRef }: { targetRef: React.RefObject<HTMLDivElement | null> }) => {
   const { scrollYProgress } = useScroll({
     target: targetRef,

@@ -15,14 +15,27 @@ const CTA = () => {
           >
             <motion.div
               className="mb-8"
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              initial={{ scale: 1, opacity: 0.9 }}
+              animate={{ scale: [1, 1.08, 1], opacity: [0.9, 1, 0.9] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <div className="w-20 h-20 mx-auto rounded-full border-2 border-fg/20 flex items-center justify-center text-3xl">
-                💡
+              <div className="w-20 h-20 mx-auto rounded-full border-2 border-fg/20 flex items-center justify-center">
+                <svg
+                  className="w-10 h-10 text-fg/70"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M9 18h6" />
+                  <path d="M10 22h4" />
+                  <path d="M12 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3.5 5.5V16a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-1.5c2-1 3.5-3 3.5-5.5a7 7 0 0 0-7-7z" />
+                </svg>
               </div>
             </motion.div>
-
             <h2 className="heading text-4xl md:text-6xl mb-6">Have a Project in Mind?</h2>
             <p className="text-xl text-fg/70 mb-12 leading-relaxed">
               Let's scope it together and find the fastest path to value. 

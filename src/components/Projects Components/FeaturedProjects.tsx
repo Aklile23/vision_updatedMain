@@ -37,8 +37,8 @@ const FeaturedProjects = () => {
           tags: ["3D Visualization", "Real Estate", "Interactive"],
           category: "Immersive 3D",
           featured: true,
-          technologies: ["WebGL", "React", "Three.js", "UI/UX"],
-          impact: "Enhanced buyer satisfaction & reduced decision time",
+          technologies: ["C#", "Unity", "React", "Unreal"],
+          impact: "Enhanced buyer satisfaction & reduced decision time, accessible anywhere, anytime",
           visual: "customizer"
         },
         {

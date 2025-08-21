@@ -154,7 +154,7 @@ const HomeSolutions = () => {
                   id: "intelligent",
                   title: "Intelligent Building Systems",
                   subtitle: "Smart Infrastructure Solutions",
-                  desc: "Beyond traditional BIM—we engineer intelligent systems that predict, optimize, and automate. AI-powered workflows that transform building data into operational intelligence, reducing costs and improving outcomes.",
+                  desc: "Beyond traditional BIM,  we engineer intelligent systems that predict, optimize, and automate. AI-powered workflows that transform building data into operational intelligence, reducing costs and improving outcomes.",
                   highlights: ["Advanced BIM", "AI Automation", "Predictive Analytics", "Smart Facilities"],
                   visual: "bim-coordination",
                 },

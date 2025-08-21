@@ -93,7 +93,7 @@ export default function Solutions() {
         },
         {
           title: "Photogrammetry & Point Cloud Processing",
-          description: "We specialize in converting photos and raw data into detailed, structured 3D models. These high-resolution outputs enhance workflows for applications such as design validation, construction, and simulation.",
+          description: "We specialize in converting photo, video and raw data into detailed, structured 3D models. These high-resolution outputs enhance workflows for applications such as design validation, construction, and simulation.",
           icon: "◐",
           highlight: "Precision Data Conversion"
         }
