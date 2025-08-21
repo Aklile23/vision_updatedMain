@@ -1,31 +1,48 @@
-// HomeProjects.tsx (Original uniform grid with enhanced interactions)
+// HomeProjects.tsx — desktop unchanged; mobile optimized
 import Container from "../Container";
-import { motion, type Variants } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion, type Variants, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const HomeProjects = () => {
   const projectRefs = useRef<HTMLDivElement[]>([]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [canHover, setCanHover] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    // Detect true hover devices (desktop, some tablets with trackpads)
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const set = () => setCanHover(mq.matches);
+    set();
+    // Safari < 17 doesn't support addEventListener on MediaQueryList
+    mq.addEventListener?.("change", set);
+    return () => mq.removeEventListener?.("change", set);
+  }, []);
 
   const staggerContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+      transition: prefersReducedMotion
+        ? { duration: 0.01 }
+        : { staggerChildren: 0.15, delayChildren: 0.1 },
     },
   };
 
   const fadeInUp: Variants = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 24 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+      transition: prefersReducedMotion
+        ? { duration: 0.01 }
+        : { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
   const onCardMove = (e: React.MouseEvent<HTMLElement>, index: number) => {
+    if (!canHover) return; // disable on mobile
     const el = e.currentTarget as HTMLElement;
     const r = el.getBoundingClientRect();
     const x = e.clientX - r.left;
@@ -34,22 +51,22 @@ const HomeProjects = () => {
     const midY = r.height / 2;
     const rx = ((y - midY) / midY) * 6;
     const ry = ((midX - x) / midX) * 8;
-    
+
     el.style.setProperty("--rx", `${rx}deg`);
     el.style.setProperty("--ry", `${ry}deg`);
     el.style.setProperty("--px", `${x}px`);
     el.style.setProperty("--py", `${y}px`);
-    
+
     setHoveredIndex(index);
   };
 
   const onCardLeave = (e: React.MouseEvent<HTMLElement>) => {
+    if (!canHover) return; // disable on mobile
     const el = e.currentTarget as HTMLElement;
     el.style.setProperty("--rx", `0deg`);
     el.style.setProperty("--ry", `0deg`);
     el.style.setProperty("--px", `-9999px`);
     el.style.setProperty("--py", `-9999px`);
-    
     setHoveredIndex(null);
   };
 
@@ -94,12 +111,12 @@ const HomeProjects = () => {
 
   return (
     <section className="relative border-y border-fg/10 bg-muted-1/40 py-20 overflow-hidden">
-      {/* Enhanced but subtle background */}
-      <div className="absolute inset-0 opacity-[0.02]">
+      {/* Background ornaments: desktop only for perf */}
+      <div className="absolute inset-0 opacity-[0.02] hidden md:block">
         <div className="absolute -top-32 -right-24 w-96 h-96 rounded-full border border-fg" />
         <div className="absolute -bottom-24 -left-32 w-[28rem] h-[28rem] rounded-full border border-fg" />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-fg/[0.02] to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-fg/[0.02] to-transparent hidden md:block" />
 
       <Container>
         <motion.div
@@ -122,7 +139,7 @@ const HomeProjects = () => {
             </p>
           </motion.div>
 
-          {/* Uniform Projects Grid with Enhanced Interactions */}
+          {/* Grid */}
           <motion.div
             variants={staggerContainer}
             className="grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
@@ -132,34 +149,52 @@ const HomeProjects = () => {
                 key={p.title}
                 ref={setAt<HTMLDivElement>(projectRefs, i)}
                 variants={fadeInUp}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: i * 0.05 }}
-                animate={hoveredIndex !== null && hoveredIndex !== i ? { 
-                  opacity: 0.3, 
-                  filter: "blur(3px)"
-                } : { 
-                  opacity: 1, 
-                  filter: "blur(0px)"
-                }}
+                transition={
+                  prefersReducedMotion
+                    ? { duration: 0.01 }
+                    : { duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: i * 0.05 }
+                }
+                // Desktop: keep spotlight effect (blur other cards).
+                // Mobile: disable inter-card blur & opacity change.
+                animate={
+                  canHover
+                    ? hoveredIndex !== null && hoveredIndex !== i
+                      ? { opacity: 0.3, filter: "blur(3px)" }
+                      : { opacity: 1, filter: "blur(0px)" }
+                    : { opacity: 1, filter: "none" }
+                }
                 className={[
-                  "group relative overflow-hidden rounded-3xl border border-fg/10 bg-bg/70 backdrop-blur-sm",
-                  "hover:border-fg/25 transition-all duration-500 cursor-pointer",
-                  "transform-gpu will-change-transform"
+                  "group relative overflow-hidden rounded-3xl border border-fg/10",
+                  // Lighter mobile styles (no backdrop blur on mobile)
+                  "bg-bg/70 md:backdrop-blur-sm",
+                  // Hover borders only on hover-capable devices
+                  "transition-all duration-500 cursor-pointer",
+                  canHover ? "md:hover:border-fg/25" : "",
+                  // GPU hints only when used
+                  canHover ? "transform-gpu will-change-transform" : "",
                 ].join(" ")}
-                onMouseMove={(e) => onCardMove(e, i)}
-                onMouseLeave={onCardLeave}
-                style={{
-                  transform: "perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))",
-                }}
+                onMouseMove={canHover ? (e) => onCardMove(e, i) : undefined}
+                onMouseLeave={canHover ? onCardLeave : undefined}
+                style={
+                  canHover
+                    ? {
+                        transform:
+                          "perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))",
+                      }
+                    : undefined
+                }
               >
-                {/* Enhanced interactive spotlight */}
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    background:
-                      "radial-gradient(300px circle at var(--px,-9999px) var(--py,-9999px), rgba(255,255,255,0.06), transparent 40%)",
-                  }}
-                />
+                {/* Interactive spotlight: desktop only */}
+                {canHover && (
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{
+                      background:
+                        "radial-gradient(300px circle at var(--px,-9999px) var(--py,-9999px), rgba(255,255,255,0.06), transparent 40%)",
+                    }}
+                  />
+                )}
 
                 {/* Image */}
                 <div className="relative aspect-[16/10] overflow-hidden">
@@ -167,15 +202,20 @@ const HomeProjects = () => {
                     src={p.image}
                     alt={p.title}
                     loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    decoding="async"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    className={[
+                      "absolute inset-0 h-full w-full object-cover transition-transform ease-out",
+                      // Scale-up only on hover-capable devices
+                      canHover ? "duration-700 md:group-hover:scale-105" : "duration-300",
+                    ].join(" ")}
                   />
-                  {/* gradient overlays */}
-                  {/* <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-bg/20 to-transparent" /> */}
-                  
-                  {/* Enhanced sheen on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-50">
-                    <div className="absolute -inset-1 bg-gradient-to-tr from-transparent via-white/8 to-transparent rotate-6" />
-                  </div>
+                  {/* Sheen: desktop only */}
+                  {canHover && (
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-50">
+                      <div className="absolute -inset-1 bg-gradient-to-tr from-transparent via-white/8 to-transparent rotate-6" />
+                    </div>
+                  )}
                 </div>
 
                 {/* Content */}
@@ -192,7 +232,7 @@ const HomeProjects = () => {
                     <div>
                       <NavLink
                         to="/projects"
-                        className="shrink-0 inline-flex items-center justify-center rounded-full border border-fg/20 px-3 py-2 text-sm hover:border-fg/40 hover:bg-fg/5 transition-all duration-300"
+                        className="shrink-0 inline-flex items-center justify-center rounded-full border border-fg/20 px-3 py-2 text-sm md:hover:border-fg/40 md:hover:bg-fg/5 transition-all duration-300"
                       >
                         View
                       </NavLink>
@@ -200,13 +240,11 @@ const HomeProjects = () => {
                   </div>
 
                   {/* Tags */}
-                  <div 
-                    className="mt-4 flex flex-wrap gap-2"
-                  >
+                  <div className="mt-4 flex flex-wrap gap-2">
                     {p.tags.map((t) => (
                       <span
                         key={t}
-                        className="px-3 py-1 text-xs font-medium rounded-full bg-fg/10 text-fg/70 border border-fg/15 hover:bg-fg/15 hover:border-fg/25 transition-all duration-300"
+                        className="px-3 py-1 text-xs font-medium rounded-full bg-fg/10 text-fg/70 border border-fg/15 md:hover:bg-fg/15 md:hover:border-fg/25 transition-all duration-300"
                       >
                         {t}
                       </span>
@@ -215,7 +253,7 @@ const HomeProjects = () => {
                 </div>
 
                 {/* Corner accent */}
-                <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-fg/20 group-hover:bg-fg/40 transition-colors duration-500" />
+                <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-fg/20 md:group-hover:bg-fg/40 transition-colors duration-500" />
               </motion.article>
             ))}
           </motion.div>
@@ -224,13 +262,13 @@ const HomeProjects = () => {
           <motion.div className="text-center mt-12" variants={fadeInUp}>
             <NavLink
               to="/projects"
-              className="group inline-flex items-center gap-2 rounded-full bg-fg text-bg px-6 py-3 font-medium hover:bg-fg/90 hover:shadow-lg transition-all duration-300 relative z-10"
+              className="group inline-flex items-center gap-2 rounded-full bg-fg text-bg px-6 py-3 font-medium md:hover:bg-fg/90 md:hover:shadow-lg transition-all duration-300 relative z-10"
             >
               Explore All Projects
-              <svg 
-                className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" 
-                viewBox="0 0 24 24" 
-                fill="none" 
+              <svg
+                className="w-4 h-4 md:group-hover:translate-x-1 transition-transform duration-300"
+                viewBox="0 0 24 24"
+                fill="none"
                 stroke="currentColor"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
