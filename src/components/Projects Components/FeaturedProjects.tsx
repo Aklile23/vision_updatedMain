@@ -39,7 +39,8 @@ const FeaturedProjects = () => {
           featured: true,
           technologies: ["C#", "Unity", "React", "Unreal"],
           impact: "Enhanced buyer satisfaction & reduced decision time, accessible anywhere, anytime",
-          visual: "customizer"
+          visual: "customizer",
+          caseStudyLink: "/projects/IC-CaseStudy" 
         },
         {
           id: 2,
@@ -51,7 +52,8 @@ const FeaturedProjects = () => {
           featured: true,
           technologies: ["Drone Technology", "Point Clouds", "3D Reconstruction"],
           impact: "Accurate site documentation & heritage preservation",
-          visual: "photogrammetry"
+          visual: "photogrammetry",
+          caseStudyLink: "/projects/IC-CaseStudy" 
         },
         {
           id: 3,
@@ -63,7 +65,8 @@ const FeaturedProjects = () => {
           featured: false,
           technologies: ["Computer Vision", "WebRTC", "Animation"],
           impact: "Immersive user engagement & interaction",
-          visual: "motion"
+          visual: "motion",
+          caseStudyLink: "" 
         },
         {
           id: 4,
@@ -75,7 +78,8 @@ const FeaturedProjects = () => {
           featured: false,
           technologies: ["ARCore", "GPS", "Mobile Development"],
           impact: "Enhanced engagement through gamification",
-          visual: "ar-hunt"
+          visual: "ar-hunt",
+          caseStudyLink: "" 
         },
         {
           id: 5,
@@ -87,7 +91,8 @@ const FeaturedProjects = () => {
           featured: true,
           technologies: ["Machine Learning", "NLP", "Voice Recognition"],
           impact: "Improved accessibility & user experience",
-          visual: "ai-assistant"
+          visual: "ai-assistant",
+          caseStudyLink: "" 
         },
         {
           id: 6,
@@ -99,7 +104,8 @@ const FeaturedProjects = () => {
           featured: false,
           technologies: ["RPA", "API Integration", "Data Analytics"],
           impact: "Reduced manual work & increased efficiency",
-          visual: "automation"
+          visual: "automation",
+          caseStudyLink: "" 
         }
     ];
 
@@ -452,13 +458,15 @@ const FeaturedProjects = () => {
                         </motion.div>
 
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                            <button className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl border-2 border-fg/20 text-fg hover:border-fg/40 hover:bg-fg/10 transition-all duration-300 font-semibold text-lg min-w-[160px]">
+                            <NavLink 
+                                to={project.caseStudyLink}
+                                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl border-2 border-fg/20 text-fg hover:border-fg/40 hover:bg-fg/10 transition-all duration-300 font-semibold text-lg min-w-[160px]">
                             Case Study
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
-                            </button>
+                            </NavLink>
                         </motion.div>
                         </motion.div>
                     </div>

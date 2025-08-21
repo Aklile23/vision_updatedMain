@@ -22,7 +22,8 @@ const AllProjects = () => {
           impact: "Enhanced buyer satisfaction & reduced decision time",
           visual: "customizer",
           image: "/images/projects/ImmersiveCustomizer/1.png",
-          status: "Done" 
+          status: "Done", 
+          caseStudyLink: "/projects/IC-CaseStudy" 
         },
         {
           id: 2,
@@ -36,7 +37,8 @@ const AllProjects = () => {
           impact: "Accurate site documentation & heritage preservation",
           visual: "photogrammetry",
           image: "/images/projects/AerialPhotogrammetry/1.png",
-          status: "Done" 
+          status: "Done",
+          caseStudyLink: "/projects/IC-CaseStudy" 
         },
         {
           id: 3,
@@ -50,7 +52,8 @@ const AllProjects = () => {
           impact: "Immersive user engagement & interaction",
           visual: "motion",
           image: "/images/projects/InteractiveVisuals/4.png",
-          status: "Done" 
+          status: "Done",
+          caseStudyLink: "/projects/IC-CaseStudy" 
         },
         {
           id: 4,
@@ -64,7 +67,8 @@ const AllProjects = () => {
           impact: "Improved accessibility & user experience",
           visual: "ai-assistant",
           image: "/images/projects/VirtualAssistant/2.png",
-          status: "Done" 
+          status: "Done",
+          caseStudyLink: "/projects/IC-CaseStudy" 
         },
         {
           id: 5,
@@ -78,7 +82,8 @@ const AllProjects = () => {
           impact: "Enhanced engagement through gamification",
           visual: "ar-hunt",
           image: "/images/projects/ComingSoon/ComingSoon.png",
-          status: "Soon" 
+          status: "Soon",
+          caseStudyLink: ""  
         },
         {
           id: 6,
@@ -92,7 +97,8 @@ const AllProjects = () => {
           impact: "Reduced manual work & increased efficiency",
           visual: "automation",
           image: "/images/projects/ComingSoon/ComingSoon.png",
-          status: "Soon" 
+          status: "Soon",
+          caseStudyLink: ""  
         }
       ];
     
@@ -245,9 +251,13 @@ const AllProjects = () => {
                         >
                           Discuss
                         </NavLink>
-                        <button className="px-4 py-2 rounded-full border border-fg/20 text-fg hover:border-fg/40 hover:bg-fg/5 transition-all duration-300 text-sm">
+
+                        <NavLink
+                          to={project.caseStudyLink} // 👈 link comes from array
+                          className="px-4 py-2 rounded-full border border-fg/20 text-fg hover:border-fg/40 hover:bg-fg/5 transition-all duration-300 text-sm"
+                        >
                           Details
-                        </button>
+                        </NavLink>
                       </>
                     ) : (
                       <>
@@ -257,6 +267,7 @@ const AllProjects = () => {
                         >
                           Discuss
                         </NavLink>
+
                         <button 
                           disabled 
                           className="px-4 py-2 rounded-full border border-fg/20 text-fg/40 cursor-not-allowed text-sm"
@@ -266,6 +277,7 @@ const AllProjects = () => {
                       </>
                     )}
                   </div>
+
                 </div>
               </motion.article>
             ))}

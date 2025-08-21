@@ -8,18 +8,24 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import ScrollManager from "./components/ScrollManager";
 
+import ImmersiveCustomizerCaseStudy from "./pages/Projects/ImmersiveCustomizerCaseStudy";
+
 export default function App() {
   return (
     <BrowserRouter>
       <ScrollManager />
       <Routes>
         <Route element={<Layout />}>
+          {/* Pages */}
           <Route path="/" element={<Home />} />
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
+
+          {/* Projects */}
+          <Route path="/projects/IC-CaseStudy" element={<ImmersiveCustomizerCaseStudy />} />
         </Route>
       </Routes>
     </BrowserRouter>
