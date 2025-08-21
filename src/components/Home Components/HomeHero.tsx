@@ -107,7 +107,7 @@ const HomeHero = () => {
               We craft <span className="text-fg font-medium">immersive 3D experiences</span>, build{" "}
               <span className="text-fg font-medium">intelligent systems</span>, and deploy{" "}
               <span className="text-fg font-medium">custom AI solutions</span> that transform ideas
-              into extraordinary digital realities.
+              into digital realities.
             </motion.p>
 
             {/* Actions */}
