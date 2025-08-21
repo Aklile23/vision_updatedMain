@@ -194,10 +194,10 @@ const HomeSolutions = () => {
                         <motion.span
                           key={highlight}
                           className="px-4 py-2 text-sm font-medium bg-fg/10 text-fg/70 rounded-full border border-fg/15 hover:bg-fg/15 hover:border-fg/25 transition-all duration-300"
-                          initial={!reduceMotion ? { opacity: 0, scale: 0.8 } : undefined}
-                          whileInView={!reduceMotion ? { opacity: 1, scale: 1 } : undefined}
-                          whileHover={!reduceMotion ? { scale: 1.05 } : undefined}
-                          transition={!reduceMotion ? { delay: i * 0.1 + idx * 0.05 } : undefined}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ delay: i * 0.1 + idx * 0.05 }}
                           viewport={{ once: true }}
                         >
                           {highlight}
@@ -458,8 +458,20 @@ const HomeSolutions = () => {
               </div>
 
               <div className="grid gap-6 md:grid-cols-4">
-                {[{ phase: "Discovery", desc: "Deep-dive analysis of requirements, constraints, and success metrics" }, { phase: "Architecture", desc: "Technical design and solution blueprint with detailed specifications" }, { phase: "Development", desc: "Agile implementation with continuous testing and client feedback loops" }, { phase: "Delivery", desc: "Seamless deployment, training, and ongoing support for sustained success" }].map((step, idx) => (
-                  <motion.div key={step.phase} className="relative p-6 rounded-2xl bg-bg/50 border border-fg/10" initial={!reduceMotion ? { opacity: 0, y: 20 } : undefined} whileInView={!reduceMotion ? { opacity: 1, y: 0 } : undefined} transition={!reduceMotion ? { delay: idx * 0.1 } : undefined} viewport={{ once: true }}>
+              {[
+                  { phase: "Discovery", desc: "Deep-dive analysis of requirements, constraints, and success metrics" },
+                  { phase: "Architecture", desc: "Technical design and solution blueprint with detailed specifications" },
+                  { phase: "Development", desc: "Agile implementation with continuous testing and client feedback loops" },
+                  { phase: "Delivery", desc: "Seamless deployment, training, and ongoing support for sustained success" }
+                ].map((step, idx) => (
+                  <motion.div
+                    key={step.phase}
+                    className="relative p-6 rounded-2xl bg-bg/50 border border-fg/10"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.1 }}
+                    viewport={{ once: true }}
+                  >
                     <div className="flex items-center gap-3 mb-3">
                       <div className="w-8 h-8 rounded-full bg-fg/15 flex items-center justify-center text-sm font-semibold">{idx + 1}</div>
                       <h4 className="font-semibold">{step.phase}</h4>
