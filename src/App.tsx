@@ -8,7 +8,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import ScrollManager from "./components/ScrollManager";
 
-import ImmersiveCustomizerCaseStudy from "./pages/Projects/ImmersiveCustomizerCaseStudy";
+import ImmersiveCustomizerCaseStudy from "./pages/Projects/ImmersiveCustomizer/ImmersiveCustomizerCaseStudy";
 
 export default function App() {
   return (
