@@ -492,7 +492,7 @@ export default function Navbar() {
             >
               {/* Header section - minimal */}
               <motion.div 
-                className="pt-44 px-8 text-center"
+                className="pt-24 px-8 text-center"
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
