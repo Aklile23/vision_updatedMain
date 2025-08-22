@@ -117,30 +117,35 @@ const HomeProjects = () => {
       desc: "An interactive solution for real estate marketing and communication between buyers and developers. It enables buyers to view and edit the interior finishes of their future homes.",
       tags: ["VR", "Immersive Content", "WebGL"],
       image: "/images/Home/projects/ImmersiveCustomizer.png",
+      caseStudyLink: "/projects/IC-CaseStudy" 
     },
     {
       title: "Aerial Photogrammetry",
       desc: "Creation of 3D geospatial models of construction sites using drone photography. These reconstructed spaces facilitate the management of large-scale projects.",
       tags: ["Photogrammetry", "Reality Capture"],
       image: "/images/Home/projects/Aerial Photogrammetry.png",
+      caseStudyLink: "" 
     },
     {
       title: "Interactive Visuals",
       desc: "A motion replication tool, where a character mimics the real-time movements of a viewer. This technology adds an engaging, immersive layer to digital experiences.",
       tags: ["XR", "Realtime"],
       image: "/images/Home/projects/interactive-visuals.png",
+      caseStudyLink: "" 
     },
     {
       title: "Virtual Assistant",
       desc: "AI Virtual Assistant, an innovative solution that promises a multi-faceted engagement. It is equipped to converse in several languages: English, French, Arabic, Chinese and more.",
       tags: ["AI VirtualAssistant", "Conversational AI"],
       image: "/images/Home/projects/virtualAssistant.png",
+      caseStudyLink: "" 
     },
     {
       title: "3D Digital Billboard",
       desc: "This technology enables customers to view the ads without the use of special glasses, Creating a vibrant and lifelike experience that simply can't be replicated with traditional 2D billboards.",
       tags: ["NakedEye", "3D outdoor Ads"],
       image: "/images/Home/projects/3DBillboard.png",
+      caseStudyLink: "" 
     },
   ];
 
@@ -262,7 +267,7 @@ const HomeProjects = () => {
                       </div>
                       <div>
                         <NavLink
-                          to="/projects"
+                          to={p.caseStudyLink}
                           className="shrink-0 inline-flex items-center justify-center rounded-full border border-fg/20 px-3 py-2 text-sm md:hover:border-fg/40 md:hover:bg-fg/5 transition-all duration-300"
                         >
                           View

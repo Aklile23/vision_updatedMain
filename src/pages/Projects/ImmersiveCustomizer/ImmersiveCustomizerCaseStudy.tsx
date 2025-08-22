@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import Container from "../../../components/Container";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 
 export default function ImmersiveCustomizerCaseStudy() {
-  const [activeSection, setActiveSection] = useState("overview");
+
   const tiltTickingRef = useRef(false);
 
   const handleMouseMove = (e: { currentTarget: any; clientX: number; clientY: number }) => {
@@ -34,53 +34,6 @@ export default function ImmersiveCustomizerCaseStudy() {
     const card = e.currentTarget;
     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
   };
-
-  const sections = [
-    { id: "overview", label: "Overview", icon: "◆" },
-    { id: "challenge", label: "Challenge", icon: "◇" },
-    { id: "solution", label: "Solution", icon: "◈" },
-    { id: "process", label: "Process", icon: "✧" },
-    { id: "results", label: "Results", icon: "◉" }
-  ];
-
-  const outcomes = [
-    { k: "Decision time", v: "↓ 35%", icon: "↓" },
-    { k: "Buyer satisfaction", v: "↑ 24%", icon: "↑" },
-    { k: "Revisions", v: "↓ 40%", icon: "↓" },
-  ];
-
-  const processSteps = [
-    {
-      title: "Discovery & Scope",
-      description: "Stakeholder interviews, KPIs, content inventory, and constraints.",
-      duration: "2-3 weeks",
-      deliverables: ["User Research", "Technical Requirements", "Project Roadmap"]
-    },
-    {
-      title: "Design & Prototyping", 
-      description: "UX flows, UI system, rapid WebGL prototypes for material swaps and lighting.",
-      duration: "4-5 weeks",
-      deliverables: ["UI/UX Design", "Interactive Prototypes", "Technical Specs"]
-    },
-    {
-      title: "Build",
-      description: "React + Three.js implementation with reusable scene components.",
-      duration: "8-10 weeks",
-      deliverables: ["Core Application", "3D Scene Engine", "Material System"]
-    },
-    {
-      title: "Test & Iterate",
-      description: "Qualitative sessions + analytics instrumentation for usage patterns.",
-      duration: "3-4 weeks",
-      deliverables: ["User Testing", "Performance Optimization", "Bug Fixes"]
-    },
-    {
-      title: "Launch & Handoff",
-      description: "Deployment, docs, and enablement for sales and support teams.",
-      duration: "2-3 weeks",
-      deliverables: ["Production Deploy", "Documentation", "Team Training"]
-    }
-  ];
 
   return (
     <main className="bg-bg text-fg min-h-screen">
@@ -118,193 +71,134 @@ export default function ImmersiveCustomizerCaseStudy() {
               </NavLink>
             </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              {/* Content */}
-              <div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="mb-6"
-                >
-                  <div className="flex items-center gap-4 mb-6">
-                    <span className="h-px w-12 bg-gradient-to-r from-transparent to-fg/40" />
-                    <span className="text-sm tracking-[0.3em] uppercase text-fg/60 font-medium">
-                      Case Study
-                    </span>
-                  </div>
-                </motion.div>
-
-                <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="heading text-4xl md:text-6xl lg:text-7xl mb-6 leading-tight"
-                >
-                  Immersive
-                  <span className="block text-fg/70">Customizer</span>
-                </motion.h1>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="text-lg md:text-xl text-fg/70 leading-relaxed mb-8 max-w-2xl"
-                >
-                  An immersive, configurable environment for real-estates to present
-                  multiple design alternatives and let buyers test finishes, layouts, and materials
-                  in real time improving communication, market reach, and decision confidence.
-                </motion.p>
-
-                {/* Tech Stack */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                  className="flex flex-wrap gap-3 mb-8"
-                >
-                  {["Immersive 3D", "Web-Based & VR", "React", "Three.js / WebGL", "UI/UX"].map(
-                    (tech, i) => (
-                      <motion.span
-                        key={tech}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.7 + i * 0.1 }}
-                        className="px-4 py-2 text-sm rounded-full bg-fg/10 text-fg/80 border border-fg/15 hover:bg-fg/15 transition-colors"
-                      >
-                        {tech}
-                      </motion.span>
-                    )
-                  )}
-                </motion.div>
-
-                {/* CTA */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 }}
-                >
-                  <a
-                    href="https://your-demo-link.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-fg text-bg
-                              font-semibold shadow-xl hover:bg-fg/90 hover:shadow-2xl
-                              transition-all duration-300"
-                  >
-                    <span>Try It Yourself</span>
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                </motion.div>
-              </div>
-
-              {/* Interactive Visual */}
+            {/* Header Content */}
+            <div className="mb-12">
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-                className="relative"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="mb-6"
               >
-                <div
-                  className="group relative aspect-[4/3] rounded-3xl overflow-hidden border border-fg/10 bg-gradient-to-br from-fg/5 to-fg/10 shadow-2xl"
-                  style={{ transition: 'transform 0.3s ease' }}
-                >
-                  {/* Interactive spotlight */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{
-                      background: "radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.1), transparent 40%)"
-                    }}
-                  />
-
-                  {/* Video/Image Content */}
-                  <div className="absolute inset-0">
-                    <video
-                      src="/videos/projects/IC/Immersive_Customizer.mp4"
-                      controls
-                      className="w-full h-full object-cover"
-                      poster="/images/projects/ImmersiveCustomizer/1.png"
-                      controlsList="nodownload"
-                    />
-                  </div>
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="h-px w-12 bg-gradient-to-r from-transparent to-fg/40" />
+                  <span className="text-sm tracking-[0.3em] uppercase text-fg/60 font-medium">
+                    Case Study
+                  </span>
                 </div>
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="heading text-4xl md:text-6xl lg:text-7xl mb-6 leading-tight"
+              >
+                Immersive
+                <span className="block text-fg/70">Customizer</span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="text-lg md:text-xl text-fg/70 leading-relaxed mb-8 max-w-4xl"
+              >
+                An immersive, configurable environment for real-estates to present
+                multiple design alternatives and let buyers test finishes, layouts, and materials
+                in real time improving communication, market reach, and decision confidence.
+              </motion.p>
+
+              {/* Tech Stack */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="flex flex-wrap gap-3 mb-8"
+              >
+                {["Immersive 3D", "Standalone VR", "Web-Based VR"].map(
+                  (tech, i) => (
+                    <motion.span
+                      key={tech}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.7 + i * 0.1 }}
+                      className="px-4 py-2 text-sm rounded-full bg-fg/10 text-fg/80 border border-fg/15 hover:bg-fg/15 transition-colors"
+                    >
+                      {tech}
+                    </motion.span>
+                  )
+                )}
+              </motion.div>
+
+              {/* CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+              >
+                <a
+                  href="https://your-demo-link.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-fg text-bg
+                            font-semibold shadow-xl hover:bg-fg/90 hover:shadow-2xl
+                            transition-all duration-300"
+                >
+                  <span>Try It Yourself</span>
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
               </motion.div>
             </div>
-          </motion.div>
-        </Container>
-      </section>
 
-      {/* Key Outcomes */}
-      <section className="py-16 md:py-24">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-2xl md:text-3xl font-semibold mb-4">Key Outcomes</h2>
-            <p className="text-fg/70 max-w-2xl mx-auto">Measurable improvements across critical business metrics</p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {outcomes.map((outcome, i) => (
-              <motion.div
-                key={outcome.k}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="group relative"
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
+            {/* Large Video Showcase */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="relative"
+            >
+              <div
+                className="group relative aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden border border-fg/10 bg-gradient-to-br from-fg/5 to-fg/10 shadow-2xl"
                 style={{ transition: 'transform 0.3s ease' }}
               >
-                <div className="relative rounded-2xl border border-fg/10 bg-bg shadow-md p-8 hover:border-fg/20 hover:shadow-xl transition-all duration-300 overflow-hidden">
-                  {/* Interactive spotlight */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{
-                      background: "radial-gradient(200px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.05), transparent 40%)"
-                    }}
-                  />
+                {/* Interactive spotlight */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background: "radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.08), transparent 40%)"
+                  }}
+                />
 
-                  <div className="relative z-10 text-center">
-                    <div className="text-3xl mb-3 text-fg/60">{outcome.icon}</div>
-                    <div className="text-sm text-fg/60 mb-2">{outcome.k}</div>
-                    <div className="text-3xl md:text-4xl font-bold">{outcome.v}</div>
+                {/* Video Content */}
+                <div className="absolute inset-0">
+                  <video
+                    src="/videos/projects/IC/Immersive_Customizer.mp4"
+                    controls
+                    className="w-full h-full object-cover"
+                    poster="/images/projects/ImmersiveCustomizer/1.png"
+                    controlsList="nodownload"
+                  />
+                </div>
+
+                {/* Play Indicator Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">
+                    <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+
+                {/* Gradient overlays for better text contrast */}
+                <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/30 to-transparent pointer-events-none" />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
+              </div>
+            </motion.div>
+          </motion.div>
         </Container>
       </section>
 
-      {/* Navigation Tabs */}
-      <section className="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-fg/10 py-4">
-        <Container>
-          <div className="flex gap-2 overflow-x-auto scrollbar-hide">
-            {sections.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => setActiveSection(section.id)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
-                  activeSection === section.id
-                    ? 'bg-fg text-bg shadow-lg'
-                    : 'bg-fg/10 text-fg hover:bg-fg/15 border border-fg/15'
-                }`}
-              >
-                <span>{section.icon}</span>
-                {section.label}
-              </button>
-            ))}
-          </div>
-        </Container>
-      </section>
+      <div className="divider" />
 
       {/* Challenge & Solution */}
       <section id="challenge" className="py-16 md:py-24">
@@ -392,7 +286,7 @@ export default function ImmersiveCustomizerCaseStudy() {
                   <h3 className="text-2xl md:text-3xl font-semibold mb-6">Our Solution</h3>
                   <div className="space-y-4 text-fg/80 leading-relaxed">
                     <p>
-                      A browser-based and VR-ready customizer that embeds your concept or final 3D model
+                      A browser based and VR ready customizer that embeds your concept or final 3D model
                       in an immersive scene. Clients explore, compare presets, and switch finishes and
                       layouts in real time, while cost and selection data sync behind the scenes for
                       accurate decisions.
@@ -422,8 +316,8 @@ export default function ImmersiveCustomizerCaseStudy() {
         </Container>
       </section>
 
-      {/* How It Works */}
-      <section id="solution" className="py-16 md:py-24 bg-gradient-to-b from-transparent via-fg/[0.02] to-transparent">
+      {/* How It Works  */}
+      <section id="solution" className="py-16 md:py-24 bg-black text-white">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -431,8 +325,8 @@ export default function ImmersiveCustomizerCaseStudy() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-semibold mb-6">How It Works</h2>
-            <p className="text-lg text-fg/70 max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-white">How It Works</h2>
+            <p className="text-lg text-white/70 max-w-3xl mx-auto">
               A comprehensive workflow from concept to deployment
             </p>
           </motion.div>
@@ -449,31 +343,31 @@ export default function ImmersiveCustomizerCaseStudy() {
                 onMouseLeave={handleMouseLeave}
                 style={{ transition: 'transform 0.3s ease' }}
               >
-                <div className="relative rounded-3xl border border-fg/10 bg-bg p-8 md:p-12 shadow-md overflow-hidden">
+                <div className="relative rounded-3xl border border-white/10 bg-white/5 p-8 md:p-12 shadow-md overflow-hidden backdrop-blur-sm">
                   {/* Interactive spotlight */}
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{
-                      background: "radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06), transparent 40%)"
+                      background: "radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.08), transparent 40%)"
                     }}
                   />
 
                   <div className="relative z-10">
-                    <p className="text-lg text-fg/80 leading-relaxed mb-8">
+                    <p className="text-lg text-white/80 leading-relaxed mb-8">
                       Developers/designers provide a concept 3D model or a finished design to embed into
                       the immersive environment. Optional furniture libraries and curated finishing
-                      scenarios can be attached. A materials dataset—including unit prices—enables accurate
+                      scenarios can be attached. A materials dataset including unit prices enables accurate
                       cost computation and optimization during customization.
                     </p>
 
                     <div className="grid md:grid-cols-2 gap-6">
                       {[
-                        { title: "Model Integration", desc: "Embed concept or finished architectural models", icon: "◻" },
-                        { title: "Asset Libraries", desc: "Add furniture libraries & finishing scenarios", icon: "◧" },
-                        { title: "Cost Analytics", desc: "Use material datasets with unit pricing for accuracy", icon: "◨" },
-                        { title: "Cloud Deployment", desc: "Deploy to cloud and integrate with existing systems", icon: "◢" },
-                        { title: "Multi-Platform", desc: "Access via desktop browser or VR headset", icon: "◣" },
-                        { title: "Real-time Changes", desc: "Clients make live changes to layout and materials", icon: "◤" }
+                        { title: "Model Integration", desc: "Embed concept or finished architectural models", icon: "◻", isSpecial: true },
+                        { title: "Asset Libraries", desc: "Add furniture libraries & finishing scenarios", icon: "◧", isSpecial: false },
+                        { title: "Cost Analytics", desc: "Use material datasets with unit pricing for accuracy", icon: "◨", isSpecial: false },
+                        { title: "Cloud Deployment", desc: "Deploy to cloud and integrate with existing systems", icon: "◢", isSpecial: false },
+                        { title: "Multi-Platform", desc: "Access via desktop browser or VR headset", icon: "◣", isSpecial: false },
+                        { title: "Real-time Changes", desc: "Clients make live changes to layout and materials", icon: "◤", isSpecial: false }
                       ].map((feature, i) => (
                         <motion.div
                           key={feature.title}
@@ -481,12 +375,20 @@ export default function ImmersiveCustomizerCaseStudy() {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: i * 0.1 }}
-                          className="flex items-start gap-4 p-4 rounded-xl hover:bg-fg/5 transition-colors"
+                          className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/10 transition-colors"
                         >
-                          <span className="text-2xl text-fg/60">{feature.icon}</span>
+                          <span 
+                            className={`text-2xl ${
+                              feature.isSpecial 
+                                ? "text-white bg-black p-2 rounded-lg border border-white/20" 
+                                : "text-white/60"
+                            }`}
+                          >
+                            {feature.icon}
+                          </span>
                           <div>
-                            <h4 className="font-semibold mb-1">{feature.title}</h4>
-                            <p className="text-sm text-fg/70">{feature.desc}</p>
+                            <h4 className="font-semibold mb-1 text-white">{feature.title}</h4>
+                            <p className="text-sm text-white/70">{feature.desc}</p>
                           </div>
                         </motion.div>
                       ))}
@@ -507,140 +409,45 @@ export default function ImmersiveCustomizerCaseStudy() {
               onMouseLeave={handleMouseLeave}
               style={{ transition: 'transform 0.3s ease' }}
             >
-              <div className="relative rounded-3xl border border-fg/10 bg-bg p-8 shadow-md h-full overflow-hidden">
+              <div className="relative rounded-3xl border border-white/10 bg-white/5 p-8 shadow-md h-full overflow-hidden backdrop-blur-sm">
                 {/* Interactive spotlight */}
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{
-                    background: "radial-gradient(250px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06), transparent 40%)"
+                    background: "radial-gradient(250px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.08), transparent 40%)"
                   }}
                 />
 
                 <div className="relative z-10">
-                  <div className="w-10 h-10 rounded-xl bg-fg/10 border border-fg/20 flex items-center justify-center mb-6">
-                    <span className="text-lg">◈</span>
+                  <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center mb-6">
+                    <span className="text-lg text-white">◈</span>
                   </div>
 
-                  <h3 className="text-xl font-semibold mb-6">Access Modes</h3>
+                  <h3 className="text-xl font-semibold mb-6 text-white">Access Modes</h3>
                   <div className="space-y-6">
-                    <div className="p-4 rounded-xl border border-fg/10 hover:border-fg/20 transition-colors">
-                      <h4 className="font-semibold mb-2 flex items-center gap-2">
-                        <span className="w-2 h-2 bg-fg/60 rounded-full"></span>
+                    <div className="p-4 rounded-xl border border-white/10 hover:border-white/20 transition-colors bg-white/5">
+                      <h4 className="font-semibold mb-2 flex items-center gap-2 text-white">
+                        <span className="w-2 h-2 bg-white/60 rounded-full"></span>
                         Web Platform
                       </h4>
-                      <p className="text-sm text-fg/70 leading-relaxed">
+                      <p className="text-sm text-white/70 leading-relaxed">
                         Open in a desktop browser, or through a VR headset's browser for immersion.
                       </p>
                     </div>
                     
-                    <div className="p-4 rounded-xl border border-fg/10 hover:border-fg/20 transition-colors">
-                      <h4 className="font-semibold mb-2 flex items-center gap-2">
-                        <span className="w-2 h-2 bg-fg/60 rounded-full"></span>
+                    <div className="p-4 rounded-xl border border-white/10 hover:border-white/20 transition-colors bg-white/5">
+                      <h4 className="font-semibold mb-2 flex items-center gap-2 text-white">
+                        <span className="w-2 h-2 bg-white/60 rounded-full"></span>
                         Standalone VR App
                       </h4>
-                      <p className="text-sm text-fg/70 leading-relaxed">
-                        Install on a headset for a seamless showroom-like experience.
+                      <p className="text-sm text-white/70 leading-relaxed">
+                        Install on a headset for a seamless showroom like experience.
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
             </motion.div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Process Timeline */}
-      <section id="process" className="py-16 md:py-24">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-semibold mb-6">Development Process</h2>
-            <p className="text-lg text-fg/70 max-w-3xl mx-auto">
-              Our structured approach to delivering exceptional results
-            </p>
-          </motion.div>
-
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-fg/20 via-fg/40 to-fg/20 md:transform md:-translate-x-1/2" />
-
-            <div className="space-y-12">
-              {processSteps.map((step, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.2 }}
-                  className={`relative grid md:grid-cols-2 gap-8 items-center ${
-                    i % 2 === 1 ? 'md:text-right' : ''
-                  }`}
-                >
-                  {/* Timeline dot */}
-                  <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-fg rounded-full border-4 border-bg shadow-lg md:transform md:-translate-x-1/2 z-10" />
-
-                  {/* Content */}
-                  <div className={`ml-8 md:ml-0 ${i % 2 === 1 ? 'md:order-2' : 'md:order-1'}`}>
-                    <motion.div
-                      className="group relative"
-                      onMouseMove={handleMouseMove}
-                      onMouseLeave={handleMouseLeave}
-                      style={{ transition: 'transform 0.3s ease' }}
-                    >
-                      <div className="relative rounded-2xl border border-fg/10 bg-bg p-6 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
-                        {/* Interactive spotlight */}
-                        <div
-                          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                          style={{
-                            background: "radial-gradient(200px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.05), transparent 40%)"
-                          }}
-                        />
-
-                        <div className="relative z-10">
-                          <div className={`flex items-center gap-3 mb-4 ${i % 2 === 1 ? 'md:justify-end' : ''}`}>
-                            <div className="w-8 h-8 rounded-lg bg-fg/10 border border-fg/20 flex items-center justify-center">
-                              <span className="text-sm font-bold">{i + 1}</span>
-                            </div>
-                            <span className="text-xs px-3 py-1 rounded-full bg-fg/10 text-fg/70">{step.duration}</span>
-                          </div>
-                          
-                          <h4 className={`text-xl font-semibold mb-3 ${i % 2 === 1 ? 'md:text-right' : ''}`}>{step.title}</h4>
-                          <p className={`text-fg/70 leading-relaxed mb-4 ${i % 2 === 1 ? 'md:text-right' : ''}`}>{step.description}</p>
-                          
-                          <div className={i % 2 === 1 ? 'md:text-right' : ''}>
-                            <h5 className="text-sm font-semibold text-fg/60 mb-2">Key Deliverables</h5>
-                            <div className={`flex flex-wrap gap-2 ${i % 2 === 1 ? 'md:justify-end' : ''}`}>
-                              {step.deliverables.map((deliverable, j) => (
-                                <span
-                                  key={j}
-                                  className="text-xs px-2 py-1 rounded bg-fg/5 text-fg/70 border border-fg/10"
-                                >
-                                  {deliverable}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </div>
-
-                  {/* Step number (desktop) */}
-                  <div className={`hidden md:block ${i % 2 === 1 ? 'md:order-1' : 'md:order-2'}`}>
-                    <div className={`flex ${i % 2 === 1 ? 'justify-end pr-8' : 'justify-start pl-8'}`}>
-                      <span className="text-6xl font-mono text-fg/10">
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
           </div>
         </Container>
       </section>
@@ -676,7 +483,7 @@ export default function ImmersiveCustomizerCaseStudy() {
                   </h4>
                   <p className="text-fg/70 leading-relaxed">
                     By removing geographical barriers, the Immersive Customizer expands reach to global
-                    buyers—including diaspora communities—who can collaborate virtually, personalize their
+                    buyers including diaspora communities who can collaborate virtually, personalize their
                     homes remotely, and move forward faster with clarity and confidence.
                   </p>
                 </div>
@@ -781,80 +588,8 @@ export default function ImmersiveCustomizerCaseStudy() {
                     />
                   </svg>
                 </div>
-
-                {/* Floating stats */}
-                <div className="absolute bottom-6 left-6 right-6">
-                  <div className="grid grid-cols-3 gap-2 text-center">
-                    <div className="bg-bg/80 backdrop-blur rounded-lg p-2 border border-fg/20">
-                      <div className="text-lg font-bold">15+</div>
-                      <div className="text-xs text-fg/60">Countries</div>
-                    </div>
-                    <div className="bg-bg/80 backdrop-blur rounded-lg p-2 border border-fg/20">
-                      <div className="text-lg font-bold">24/7</div>
-                      <div className="text-xs text-fg/60">Access</div>
-                    </div>
-                    <div className="bg-bg/80 backdrop-blur rounded-lg p-2 border border-fg/20">
-                      <div className="text-lg font-bold">∞</div>
-                      <div className="text-xs text-fg/60">Scale</div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </motion.div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Gallery Section */}
-      <section className="py-16 md:py-24">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-semibold mb-4">Project Gallery</h2>
-            <p className="text-lg text-fg/70">Visual highlights from the development process</p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group relative"
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-                style={{ transition: 'transform 0.3s ease' }}
-              >
-                <div className="relative aspect-[4/3] rounded-2xl border border-fg/10 bg-gradient-to-br from-fg/5 to-fg/10 overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
-                  {/* Interactive spotlight */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{
-                      background: "radial-gradient(200px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.1), transparent 40%)"
-                    }}
-                  />
-
-                  {/* Placeholder content */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-fg/20 border border-fg/30 flex items-center justify-center">
-                        <span className="text-lg text-fg/60">◎</span>
-                      </div>
-                      <span className="text-sm text-fg/60 font-medium">Screenshot {i + 1}</span>
-                    </div>
-                  </div>
-
-                  {/* Image overlay effect */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-              </motion.div>
-            ))}
           </div>
         </Container>
       </section>
@@ -922,7 +657,7 @@ export default function ImmersiveCustomizerCaseStudy() {
                       to="/contact"
                       className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-semibold text-lg hover:bg-white/90 hover:shadow-xl transition-all duration-300"
                     >
-                      Start Your Project
+                      Request Demo
                       <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
