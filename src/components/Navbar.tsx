@@ -414,18 +414,17 @@ useEffect(() => {
             {/* Mobile Menu Button — fixed hamburger + full X */}
             <motion.button
               className="md:hidden p-2 rounded-xl transition-colors duration-300 relative"
-              // In your mobile menu button onClick
-onClick={() => {
-  const newState = !mobileMenuOpen;
-  setMobileMenuOpen(newState);
-  
-  // Toggle body class for extra safety
-  if (newState) {
-    document.body.classList.add('menu-open');
-  } else {
-    document.body.classList.remove('menu-open');
-  }
-}}
+              onClick={() => {
+                const newState = !mobileMenuOpen;
+                setMobileMenuOpen(newState);
+                
+                // Toggle body class for extra safety
+                if (newState) {
+                  document.body.classList.add('menu-open');
+                } else {
+                  document.body.classList.remove('menu-open');
+                }
+              }}
               
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle mobile menu"
