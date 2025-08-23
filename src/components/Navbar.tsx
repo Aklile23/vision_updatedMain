@@ -475,7 +475,7 @@ export default function Navbar() {
           >
             {/* Multi-layered backdrop with sophisticated blur */}
             <motion.div
-              className="absolute inset-0"
+              className="absolute inset-0 pointer-events-none"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -525,7 +525,8 @@ export default function Navbar() {
 
             {/* Main content container with enhanced layout */}
             <motion.div
-              className="relative h-full flex flex-col"
+              className="relative h-full flex flex-col pointer-events-auto overflow-y-auto"
+              style={{ WebkitOverflowScrolling: "touch" }}
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
