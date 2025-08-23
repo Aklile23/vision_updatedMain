@@ -11,7 +11,7 @@ const Container: React.FC<ContainerProps> = ({ children }) => (
 );
 
 const HomeHeroGraphics: React.FC = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
+  
   const heroMedia = useRef<HTMLDivElement>(null);
   const [activeCard, setActiveCard] = useState<number>(0);
 
