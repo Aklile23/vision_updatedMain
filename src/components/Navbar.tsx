@@ -8,6 +8,27 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const ticking = useRef(false);
 
+  // In your mobile menu useEffect
+useEffect(() => {
+  console.groupCollapsed("[Navbar] mobileMenuOpen effect");
+  console.info("mobileMenuOpen =", mobileMenuOpen);
+
+  // Lock or unlock body scroll
+  document.body.style.overflow = mobileMenuOpen ? "hidden" : "unset";
+
+  // Dispatch event to ScrollManager - IMPORTANT: dispatch every time
+  const detail = { overlayOpen: mobileMenuOpen };
+  console.info("dispatch app:overlay-change", detail);
+  window.dispatchEvent(new CustomEvent("app:overlay-change", { detail }));
+
+  // Cleanup
+  return () => {
+    console.info("cleanup -> unset body overflow");
+    document.body.style.overflow = "unset";
+    console.groupEnd();
+  };
+}, [mobileMenuOpen]);
+
   useEffect(() => {
     const onScroll = () => {
       if (ticking.current) return;
@@ -393,10 +414,18 @@ export default function Navbar() {
             {/* Mobile Menu Button — fixed hamburger + full X */}
             <motion.button
               className="md:hidden p-2 rounded-xl transition-colors duration-300 relative"
-              onClick={() => {
-                console.info("[Navbar] toggle mobileMenuOpen ->", !mobileMenuOpen);
-                setMobileMenuOpen(!mobileMenuOpen);
-              }}
+              // In your mobile menu button onClick
+onClick={() => {
+  const newState = !mobileMenuOpen;
+  setMobileMenuOpen(newState);
+  
+  // Toggle body class for extra safety
+  if (newState) {
+    document.body.classList.add('menu-open');
+  } else {
+    document.body.classList.remove('menu-open');
+  }
+}}
               
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle mobile menu"

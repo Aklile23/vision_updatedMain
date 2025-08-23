@@ -3,58 +3,49 @@ import { useLocation } from "react-router-dom";
 import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Observer } from "gsap/Observer"; // type + plugin
+import { Observer } from "gsap/Observer";
 
 gsap.registerPlugin(ScrollTrigger, Observer);
-// DO NOT call ScrollTrigger.normalizeScroll(true) here globally.
 
 export default function ScrollManager() {
   const lenisRef = useRef<Lenis | null>(null);
   const overlayOpenRef = useRef(false);
-
-  // ScrollTrigger.normalizeScroll(true) returns an Observer (or undefined).
   const normalizerRef = useRef<Observer | null>(null);
+  const updateRef = useRef<((time: number) => void) | null>(null);
 
   const { pathname, hash } = useLocation();
 
-  useLayoutEffect(() => {
-    console.groupCollapsed("[ScrollManager] mount");
+  // Initialize Lenis and setup
+  const initSmoothScroll = () => {
+    if (lenisRef.current) return;
 
-    const prefersReduced =
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    console.info("[ScrollManager] prefersReducedMotion:", prefersReduced);
+    console.info("[ScrollManager] Initializing smooth scroll");
 
-    // Create Lenis
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    
     const lenis = new Lenis({
       duration: prefersReduced ? 0 : 2.0,
       easing: (t: number) => 1 - Math.pow(1 - t, 4),
     });
     lenisRef.current = lenis;
-    console.info("[ScrollManager] Lenis created");
 
     // Drive Lenis with GSAP's ticker
     const update = (time: number) => {
-      lenis.raf(time * 1000); // gsap gives seconds; lenis expects ms
+      lenis.raf(time * 1000);
       ScrollTrigger.update();
     };
+    updateRef.current = update;
+    
     gsap.ticker.add(update);
     gsap.ticker.lagSmoothing(0);
-    console.info("[ScrollManager] GSAP ticker wired");
-
-    // Keep ST aware of Lenis scroll events
     lenis.on("scroll", ScrollTrigger.update);
 
     const scroller = document.documentElement;
-
-    // Proxy root scrolling through Lenis
     ScrollTrigger.scrollerProxy(scroller, {
       scrollTop(value?: number) {
         if (value != null) {
-          console.debug("[ScrollManager] scrollerProxy.set scrollTop ->", value);
-         
           lenis.scrollTo(value, { immediate: true });
         }
-      
         return (lenis as any).scroll || window.scrollY || window.pageYOffset || 0;
       },
       getBoundingClientRect() {
@@ -69,58 +60,75 @@ export default function ScrollManager() {
     });
 
     ScrollTrigger.defaults({ scroller });
-    console.info("[ScrollManager] scrollerProxy registered & defaults set");
-
-    // Create the ScrollTrigger normalizer and keep a handle so we can toggle it
     normalizerRef.current = ScrollTrigger.normalizeScroll(true) || null;
-    console.info("[ScrollManager] normalizeScroll created");
 
-    // Double refresh after mount
     requestAnimationFrame(() => {
-      console.info("[ScrollManager] first ST.refresh()");
       ScrollTrigger.refresh();
-      setTimeout(() => {
-        console.info("[ScrollManager] second ST.refresh()");
-        ScrollTrigger.refresh();
-      }, 0);
+      setTimeout(() => ScrollTrigger.refresh(), 0);
     });
+  };
+
+  // Destroy Lenis and cleanup
+  const destroySmoothScroll = () => {
+    console.info("[ScrollManager] Destroying smooth scroll");
+
+    if (updateRef.current) {
+      gsap.ticker.remove(updateRef.current);
+      updateRef.current = null;
+    }
+
+    if (lenisRef.current) {
+      lenisRef.current.destroy();
+      lenisRef.current = null;
+    }
+
+    ScrollTrigger.getAll().forEach((st) => st.kill());
+    if (normalizerRef.current) {
+      normalizerRef.current.kill();
+      normalizerRef.current = null;
+    }
+
+    // Restore native scrolling
+    document.documentElement.style.overflow = 'auto';
+    document.body.style.overflow = 'auto';
+  };
+
+  useLayoutEffect(() => {
+    console.groupCollapsed("[ScrollManager] mount");
+
+    // Initial setup
+    initSmoothScroll();
 
     const onLoad = () => {
-      console.info("[ScrollManager] window.load -> ST.refresh()");
       ScrollTrigger.refresh();
     };
     window.addEventListener("load", onLoad);
 
-    // Pause/Resume handlers for overlays (e.g., mobile menu)
-    const pauseSmoothScroll = () => {
-      if (overlayOpenRef.current) return;
-      overlayOpenRef.current = true;
-      console.warn(
-        "[ScrollManager] pauseSmoothScroll(): stopping Lenis & disabling ST + normalizer"
-      );
-      lenis.stop();
-      ScrollTrigger.getAll().forEach((st) => st.disable(true));
-      normalizerRef.current?.disable();
-    };
-
-    const resumeSmoothScroll = () => {
-      if (!overlayOpenRef.current) return;
-      overlayOpenRef.current = false;
-      console.warn(
-        "[ScrollManager] resumeSmoothScroll(): enabling ST + normalizer & starting Lenis"
-      );
-      ScrollTrigger.getAll().forEach((st) => st.enable());
-      normalizerRef.current?.enable();
-      lenis.start();
-      console.info("[ScrollManager] ST.refresh() after resume");
-      ScrollTrigger.refresh();
-    };
-
+    // Overlay change handler
     const onOverlayToggle = (e: Event) => {
       const detail = (e as CustomEvent).detail as { overlayOpen: boolean } | undefined;
       console.info("[ScrollManager] app:overlay-change", detail);
+      
       if (!detail) return;
-      detail.overlayOpen ? pauseSmoothScroll() : resumeSmoothScroll();
+
+      overlayOpenRef.current = detail.overlayOpen;
+
+      if (detail.overlayOpen) {
+        // Mobile menu opened - destroy smooth scroll
+        destroySmoothScroll();
+      } else {
+        // Mobile menu closed - reinitialize smooth scroll
+        setTimeout(() => {
+          if (!overlayOpenRef.current) {
+            initSmoothScroll();
+            
+            // Refresh after reinitialization
+            setTimeout(() => {
+              ScrollTrigger.refresh();
+            }, 100);
+          }
+        }, 50);
+      }
     };
 
     window.addEventListener("app:overlay-change", onOverlayToggle);
@@ -131,21 +139,24 @@ export default function ScrollManager() {
       console.groupCollapsed("[ScrollManager] cleanup");
       window.removeEventListener("load", onLoad);
       window.removeEventListener("app:overlay-change", onOverlayToggle);
-      gsap.ticker.remove(update);
-      console.info("[ScrollManager] killing all ScrollTriggers");
+      
+      // Cleanup everything
+      if (updateRef.current) {
+        gsap.ticker.remove(updateRef.current);
+      }
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+      }
       ScrollTrigger.getAll().forEach((st) => st.kill());
-      console.info("[ScrollManager] destroying Lenis");
-      lenis.destroy();
-      lenisRef.current = null;
-      normalizerRef.current?.kill();
-      normalizerRef.current = null;
+      if (normalizerRef.current) {
+        normalizerRef.current.kill();
+      }
       console.groupEnd();
     };
   }, []);
 
   // Scroll to hash / top on route change and refresh triggers
   useLayoutEffect(() => {
-    const lenis = lenisRef.current;
     console.groupCollapsed("[ScrollManager] route change");
     console.info("[ScrollManager] pathname:", pathname, "hash:", hash);
     console.info("[ScrollManager] overlayOpenRef:", overlayOpenRef.current);
@@ -162,19 +173,28 @@ export default function ScrollManager() {
         const el = document.querySelector(hash);
         if (el) {
           console.info("[ScrollManager] scrolling to hash element", hash);
-          // @ts-expect-error Lenis accepts Element
-          lenis ? lenis.scrollTo(el) : el.scrollIntoView({ behavior: "smooth", block: "start" });
-          console.info("[ScrollManager] ST.refresh() after hash scroll");
-          ScrollTrigger.refresh();
-          console.groupEnd();
-          return;
+          if (lenisRef.current) {
+            // @ts-expect-error Lenis accepts Element
+            lenisRef.current.scrollTo(el);
+          } else {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }
+      } else {
+        console.info("[ScrollManager] scrolling to top");
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(0);
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }
       }
-      console.info("[ScrollManager] scrolling to top");
-      lenis ? lenis.scrollTo(0) : window.scrollTo({ top: 0, behavior: "smooth" });
-      console.info("[ScrollManager] ST.refresh() after top scroll");
-      ScrollTrigger.refresh();
-      console.groupEnd();
+
+      // Refresh ScrollTrigger after scroll
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+        console.info("[ScrollManager] ST.refresh() after scroll");
+        console.groupEnd();
+      }, 100);
     });
   }, [pathname, hash]);
 
