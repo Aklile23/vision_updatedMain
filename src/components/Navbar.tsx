@@ -27,13 +27,27 @@ export default function Navbar() {
     setMobileMenuOpen(false);
   }, []);
 
-  // Prevent scroll when mobile menu is open
   useEffect(() => {
+    console.groupCollapsed("[Navbar] mobileMenuOpen effect");
+    console.info("[Navbar] mobileMenuOpen =", mobileMenuOpen);
+  
+    // Lock or unlock body scroll
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "unset";
+    console.info("[Navbar] body.style.overflow ->", document.body.style.overflow);
+  
+    // Dispatch event to ScrollManager
+    const detail = { overlayOpen: mobileMenuOpen };
+    console.info("[Navbar] dispatch app:overlay-change", detail);
+    window.dispatchEvent(new CustomEvent("app:overlay-change", { detail }));
+  
+    // Cleanup
     return () => {
+      console.info("[Navbar] cleanup -> unset body overflow");
       document.body.style.overflow = "unset";
+      console.groupEnd();
     };
   }, [mobileMenuOpen]);
+  
 
   // Header shell
   const headerBase =
@@ -379,7 +393,11 @@ export default function Navbar() {
             {/* Mobile Menu Button — fixed hamburger + full X */}
             <motion.button
               className="md:hidden p-2 rounded-xl transition-colors duration-300 relative"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => {
+                console.info("[Navbar] toggle mobileMenuOpen ->", !mobileMenuOpen);
+                setMobileMenuOpen(!mobileMenuOpen);
+              }}
+              
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle mobile menu"
             >
@@ -426,11 +444,34 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 md:hidden"
+            className="fixed inset-0 z-40 md:hidden overflow-y-auto overscroll-contain touch-pan-y"
+            style={{ WebkitOverflowScrolling: "touch" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            onScroll={(e) => {
+              const el = e.currentTarget;
+              console.debug("[NavbarOverlay] onScroll", {
+                scrollTop: el.scrollTop,
+                scrollHeight: el.scrollHeight,
+                clientHeight: el.clientHeight,
+              });
+            }}
+            onTouchStart={(e) => {
+              console.debug("[NavbarOverlay] onTouchStart", {
+                touches: e.touches.length,
+                target: (e.target as HTMLElement)?.tagName,
+              });
+            }}
+            onTouchMove={(e) => {
+              console.debug("[NavbarOverlay] onTouchMove", {
+                touches: e.touches.length,
+                scrollTop: (e.currentTarget as HTMLElement).scrollTop,
+              });
+            }}
+            onTouchEnd={() => console.debug("[NavbarOverlay] onTouchEnd")}
+            
           >
             {/* Multi-layered backdrop with sophisticated blur */}
             <motion.div
