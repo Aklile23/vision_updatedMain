@@ -444,7 +444,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 md:hidden overflow-y-auto overscroll-contain touch-pan-y"
+            className="fixed inset-0 z-50 md:hidden overflow-y-auto overscroll-contain touch-pan-y"
             style={{ WebkitOverflowScrolling: "touch" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
