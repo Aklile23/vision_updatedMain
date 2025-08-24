@@ -169,25 +169,25 @@ export default function ScrollManager() {
     }
 
     requestAnimationFrame(() => {
-      if (hash) {
-        const el = document.querySelector(hash);
-        if (el) {
-          console.info("[ScrollManager] scrolling to hash element", hash);
-          if (lenisRef.current) {
-            // @ts-expect-error Lenis accepts Element
-            lenisRef.current.scrollTo(el);
-          } else {
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        }
-      } else {
-        console.info("[ScrollManager] scrolling to top");
-        if (lenisRef.current) {
-          lenisRef.current.scrollTo(0);
-        } else {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-      }
+      // inside the "[ScrollManager] route change" useLayoutEffect
+if (hash) {
+  const el = document.querySelector(hash);
+  if (el) {
+    if (lenisRef.current) {
+      // @ts-expect-error Lenis accepts Element
+      lenisRef.current.scrollTo(el, { immediate: true }); // ⬅ make it immediate
+    } else {
+      el.scrollIntoView({ behavior: "auto", block: "start" }); // ⬅ no smooth
+    }
+  }
+} else {
+  if (lenisRef.current) {
+    lenisRef.current.scrollTo(0, { immediate: true }); // ⬅ force top, immediate
+  } else {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" }); // ⬅ no smooth
+  }
+}
+
 
       // Refresh ScrollTrigger after scroll
       setTimeout(() => {
