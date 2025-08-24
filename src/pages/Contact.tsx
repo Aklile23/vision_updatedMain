@@ -5,7 +5,7 @@ import {
   Copy, Check, ExternalLink
 } from "lucide-react";
 import emailjs from '@emailjs/browser';
-// import { useScrollTop } from "../hooks/useScrollTop";
+import { useScrollTop } from "../hooks/useScrollTop";
 
 
 // Mock Container component
@@ -49,7 +49,7 @@ const validateForm = (data: FormData): FormErrors => {
 
 export default function Contact() {
 
-  
+  useScrollTop();
   
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);

@@ -3,10 +3,11 @@ import Container from "../components/Container";
 import { NavLink } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import { easeOut } from "framer-motion"
-// import { useScrollTop } from "../hooks/useScrollTop";
+import { useScrollTop } from "../hooks/useScrollTop";
 
 export default function Solutions() {
 
+  useScrollTop();
   const [, setActiveSection] = useState(0);
   const [hoveredFeature, setHoveredFeature] = useState<string | null>(null);
   

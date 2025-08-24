@@ -3,9 +3,11 @@ import Container from "../components/Container";
 import { NavLink } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import { easeOut } from "framer-motion"
-// import { useScrollTop } from "../hooks/useScrollTop";
+import { useScrollTop } from "../hooks/useScrollTop";
 
 export default function About() {
+
+  useScrollTop();
 
   const [, setHoveredService] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
