@@ -234,7 +234,6 @@ const HomeHero = () => {
                   {/* Card content based on type */}
                   <div className="p-6 h-full flex flex-col bg-bg/10 md:bg-transparent">
                     {/* 3D Model Card */}
-                    {/* VR/AR Visualization Card */}
                     {card.content === "3d-model" && (
                       <>
                         <div className="flex items-center justify-between mb-4">

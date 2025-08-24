@@ -7,9 +7,12 @@ import HomeAbout from "../components/Home Components/HomeAbout";
 import HomeHero from "../components/Home Components/HomeHero";
 // import HomeTestimonials from "../components/Home Components/HomeTestimonials";
 import MiniContactForm from "../components/MiniContactForm";
+import { useScrollTop } from "../hooks/useScrollTop";
 
 
 export default function Home() {
+
+  useScrollTop();
   
   const kpiRefs = useRef<HTMLDivElement[]>([]);
 

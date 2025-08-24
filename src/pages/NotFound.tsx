@@ -1,8 +1,12 @@
 
 import Container from "../components/Container";
 import { NavLink } from "react-router-dom";
+import { useScrollTop } from "../hooks/useScrollTop";
 
 export default function NotFound() {
+
+  useScrollTop();
+  
   return (
     <main className="bg-bg text-fg">
       <section className="py-24">
