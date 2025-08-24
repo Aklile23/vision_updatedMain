@@ -11,6 +11,23 @@ export default function ImmersiveCustomizerCaseStudy() {
   const tiltTickingRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  // put this near the top of the file with other hooks/imports
+  const CubeIcon = ({ className = "" }) => (
+    <svg
+      viewBox="0 0 24 24"
+      className={`w-7 h-8 ${className}`}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z" />
+      <path d="M12 3v18M4 7.5l8 4.5 8-4.5" />
+    </svg>
+  );
+
   const handleMouseMove = (e: { currentTarget: any; clientX: number; clientY: number }) => {
     const card = e.currentTarget;
     if (tiltTickingRef.current) return;
@@ -371,7 +388,7 @@ export default function ImmersiveCustomizerCaseStudy() {
 
                     <div className="grid md:grid-cols-2 gap-6">
                       {[
-                        { title: "Model Integration", desc: "Embed concept or finished architectural models", icon: "◻", isSpecial: true },
+                        { title: "Model Integration", desc: "Embed concept or finished architectural models", icon: <CubeIcon />},
                         { title: "Asset Libraries", desc: "Add furniture libraries & finishing scenarios", icon: "◧", isSpecial: false },
                         { title: "Cost Analytics", desc: "Use material datasets with unit pricing for accuracy", icon: "◨", isSpecial: false },
                         { title: "Cloud Deployment", desc: "Deploy to cloud and integrate with existing systems", icon: "◢", isSpecial: false },
