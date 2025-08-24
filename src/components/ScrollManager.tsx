@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
-
+import { useLocation } from "react-router-dom";
 import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,7 +13,7 @@ export default function ScrollManager() {
   const normalizerRef = useRef<Observer | null>(null);
   const updateRef = useRef<((time: number) => void) | null>(null);
 
-  
+  const { pathname, hash } = useLocation();
 
   // Initialize Lenis and setup
   const initSmoothScroll = () => {
@@ -156,7 +156,29 @@ export default function ScrollManager() {
   }, []);
 
   // Scroll to hash / top on route change and refresh triggers
+  // Scroll to hash / top on route change and refresh triggers
+useLayoutEffect(() => {
+  console.groupCollapsed("[ScrollManager] route change");
   
+  // KILL ALL ScrollTrigger instances first - this prevents any pinning conflicts
+  ScrollTrigger.getAll().forEach(st => st.kill());
+  console.info("[ScrollManager] Killed all ScrollTrigger instances");
+
+  // Force immediate scroll to top
+  window.scrollTo({ top: 0, behavior: 'auto' });
+  
+  // Then reinitialize everything
+  setTimeout(() => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0);
+    }
+    
+    // Recreate ScrollTrigger instances
+    ScrollTrigger.refresh();
+    console.info("[ScrollManager] Reinitialized ScrollTrigger");
+    console.groupEnd();
+  }, 100);
+}, [pathname, hash]);
 
   return null;
 }
