@@ -145,25 +145,46 @@ export default function Contact() {
     setErrors({});
   };
 
-  // Small utility: build a maps link
-  // function mapHref(address: string) {
-  //   const q = encodeURIComponent(address);
-  //   return `https://www.google.com/maps/search/?api=1&query=${q}`;
-  // }
-
-  // Copy button used in contact rows
   function CopyButton({ text }: { text: string }) {
     const [copied, setCopied] = React.useState(false);
+  
+    async function copyText(t: string) {
+      // Try modern API
+      if (navigator?.clipboard?.writeText) {
+        try {
+          await navigator.clipboard.writeText(t);
+          return true;
+        } catch {}
+      }
+  
+      // Fallback for iOS/older browsers
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = t;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.top = "-1000px";
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, ta.value.length);
+        const ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        return ok;
+      } catch {
+        return false;
+      }
+    }
+  
+    const handleCopy = async () => {
+      const ok = await copyText(text);
+      setCopied(ok);
+      setTimeout(() => setCopied(false), 2000); // always 2s
+    };
+  
     return (
       <button
         type="button"
-        onClick={async () => {
-          try {
-            await navigator.clipboard.writeText(text);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 1200);
-          } catch {}
-        }}
+        onClick={handleCopy}
         className="inline-flex items-center gap-1 text-xs rounded-full border border-black/10 px-2 py-1 hover:bg-black/[0.04]"
         aria-label="Copy"
       >
@@ -172,6 +193,7 @@ export default function Contact() {
       </button>
     );
   }
+  
 
   // Reusable contact row
   function ContactRow({
@@ -200,22 +222,6 @@ export default function Contact() {
       </li>
     );
   }
-
-  // Simple map iframe embed (no API key required)
-  // function MapEmbed({ address, zoom = 15 }: { address: string; zoom?: number }) {
-  //   const src = `https://www.google.com/maps?q=${encodeURIComponent(address)}&z=${zoom}&output=embed`;
-  //   return (
-  //     <div className="relative">
-  //       <iframe
-  //         title={`Map to ${address}`}
-  //         src={src}
-  //         className="w-full aspect-[16/10]"
-  //         loading="lazy"
-  //         referrerPolicy="no-referrer-when-downgrade"
-  //       />
-  //     </div>
-  //   );
-  // }
 
   return (
     <main className="min-h-screen bg-white text-black relative overflow-hidden">

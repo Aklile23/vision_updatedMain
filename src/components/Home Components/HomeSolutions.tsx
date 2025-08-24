@@ -128,9 +128,19 @@ const HomeSolutions = () => {
             {/* Header Section */}
             <motion.div className="text-center mb-16" variants={fadeInUp}>
               <div className="mb-6 flex items-center justify-center gap-3">
-                <span className="h-px w-12 bg-fg/40" />
-                <span className="text-[13px] tracking-[0.25em] uppercase text-fg/70">what we do</span>
-                <span className="h-px w-12 bg-fg/40" />
+                <motion.span 
+                  className="h-px w-10 bg-fg/40"
+                  animate={{ width: [40, 60, 40] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                />
+                <span className="text-[13px] tracking-[0.25em] uppercase text-fg/70 relative">
+                  What We Do
+                </span>
+                <motion.span 
+                  className="h-px w-10 bg-fg/40"
+                  animate={{ width: [40, 60, 40] }}
+                  transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
+                />
               </div>
 
               <h2 className="heading text-4xl md:text-5xl mb-6">Our Core Service Offerings</h2>

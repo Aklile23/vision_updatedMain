@@ -48,12 +48,20 @@ const HomeAbout = () => {
         >
           {/* Header — simple, engineering-forward */}
           <motion.div className="text-center mb-16" variants={fadeInUp}>
-            <div className="mb-4 flex items-center justify-center gap-3">
-              <span className="h-px w-8 bg-fg/40" />
-              <span className="text-[13px] tracking-[0.22em] uppercase text-fg/70">
-                Who We Are
+            <div className="mb-6 flex items-center justify-center gap-3">
+              <motion.span 
+                className="h-px w-10 bg-fg/40"
+                animate={{ width: [40, 60, 40] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+              <span className="text-[13px] tracking-[0.25em] uppercase text-fg/70 relative">
+                WHO WE ARE
               </span>
-              <span className="h-px w-8 bg-fg/40" />
+              <motion.span 
+                className="h-px w-10 bg-fg/40"
+                animate={{ width: [40, 60, 40] }}
+                transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
+              />
             </div>
 
             <h2 className="heading text-4xl md:text-5xl mb-6">Our Identity & Purpose</h2>
