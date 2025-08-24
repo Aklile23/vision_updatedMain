@@ -119,7 +119,14 @@ export default function ScrollManager() {
       } else {
         // Mobile menu closed - reinitialize smooth scroll
         setTimeout(() => {
-          overlayOpenRef.current = false;
+          if (!overlayOpenRef.current) {
+            initSmoothScroll();
+            
+            // Refresh after reinitialization
+            setTimeout(() => {
+              ScrollTrigger.refresh();
+            }, 100);
+          }
         }, 50);
       }
     };
@@ -155,11 +162,11 @@ export default function ScrollManager() {
     console.info("[ScrollManager] overlayOpenRef:", overlayOpenRef.current);
 
     // If an overlay is open, don't do any programmatic scrolls
-    if (overlayOpenRef.current) {
-      console.warn("[ScrollManager] overlay open -> skip programmatic scroll");
-      console.groupEnd();
-      return;
-    }
+    // if (overlayOpenRef.current) {
+    //   console.warn("[ScrollManager] overlay open -> skip programmatic scroll");
+    //   console.groupEnd();
+    //   return;
+    // }
 
     requestAnimationFrame(() => {
       if (hash) {
