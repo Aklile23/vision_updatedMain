@@ -167,6 +167,7 @@ useEffect(() => {
                       key={item.to}
                       to={item.to}
                       className="group relative"
+                      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                     >
                       {({ isActive }) => (
                         <motion.div
@@ -411,201 +412,199 @@ useEffect(() => {
               </div>
             </nav>
 
-   
+            {/* Enhanced Mobile Menu Button - Premium Design */}
+            <motion.div className="md:hidden relative">
+              {/* Button Container with Sophisticated Styling */}
+              <motion.button
+                className={`
+                  group relative p-3 rounded-2xl transition-all duration-500 ease-out
+                  ${scrolled 
+                    ? "bg-bg/10 hover:bg-bg/20 border-2 border-bg/20 hover:border-bg/40 shadow-lg shadow-bg/10 hover:shadow-xl hover:shadow-bg/15" 
+                    : "bg-fg/8 hover:bg-fg/15 border-2 border-fg/15 hover:border-fg/25 shadow-lg shadow-fg/10 hover:shadow-xl hover:shadow-fg/15"
+                  }
+                `}
+                style={{
+                  backdropFilter: "blur(20px)",
+                  WebkitBackdropFilter: "blur(20px)",
+                }}
+                onClick={() => {
+                  const newState = !mobileMenuOpen;
+                  setMobileMenuOpen(newState);
+                  
+                  // Toggle body class for extra safety
+                  if (newState) {
+                    document.body.classList.add('menu-open');
+                  } else {
+                    document.body.classList.remove('menu-open');
+                  }
+                }}
+                whileHover={{ scale: 1.05, y: -1 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                aria-label="Toggle mobile menu"
+              >
+                {/* Animated Background Gradient */}
+                <motion.div
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100"
+                  style={{
+                    background: scrolled
+                      ? "conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,0.1), rgba(255,255,255,0.2), rgba(255,255,255,0.1), rgba(255,255,255,0.05), rgba(255,255,255,0.1))"
+                      : "conic-gradient(from 0deg at 50% 50%, rgba(0,0,0,0.05), rgba(0,0,0,0.1), rgba(0,0,0,0.05), rgba(0,0,0,0.02), rgba(0,0,0,0.05))"
+                  }}
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                />
 
-{/* Enhanced Mobile Menu Button - Premium Design */}
-<motion.div className="md:hidden relative">
-  {/* Button Container with Sophisticated Styling */}
-  <motion.button
-    className={`
-      group relative p-3 rounded-2xl transition-all duration-500 ease-out
-      ${scrolled 
-        ? "bg-bg/10 hover:bg-bg/20 border-2 border-bg/20 hover:border-bg/40 shadow-lg shadow-bg/10 hover:shadow-xl hover:shadow-bg/15" 
-        : "bg-fg/8 hover:bg-fg/15 border-2 border-fg/15 hover:border-fg/25 shadow-lg shadow-fg/10 hover:shadow-xl hover:shadow-fg/15"
-      }
-    `}
-    style={{
-      backdropFilter: "blur(20px)",
-      WebkitBackdropFilter: "blur(20px)",
-    }}
-    onClick={() => {
-      const newState = !mobileMenuOpen;
-      setMobileMenuOpen(newState);
-      
-      // Toggle body class for extra safety
-      if (newState) {
-        document.body.classList.add('menu-open');
-      } else {
-        document.body.classList.remove('menu-open');
-      }
-    }}
-    whileHover={{ scale: 1.05, y: -1 }}
-    whileTap={{ scale: 0.95 }}
-    transition={{ duration: 0.2 }}
-    aria-label="Toggle mobile menu"
-  >
-    {/* Animated Background Gradient */}
-    <motion.div
-      className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100"
-      style={{
-        background: scrolled
-          ? "conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,0.1), rgba(255,255,255,0.2), rgba(255,255,255,0.1), rgba(255,255,255,0.05), rgba(255,255,255,0.1))"
-          : "conic-gradient(from 0deg at 50% 50%, rgba(0,0,0,0.05), rgba(0,0,0,0.1), rgba(0,0,0,0.05), rgba(0,0,0,0.02), rgba(0,0,0,0.05))"
-      }}
-      animate={{ rotate: [0, 360] }}
-      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-    />
+                {/* Glow Effect */}
+                <motion.div
+                  className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background: scrolled
+                      ? "conic-gradient(from 0deg, rgba(255,255,255,0.15), rgba(255,255,255,0.02), rgba(255,255,255,0.15))"
+                      : "conic-gradient(from 0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.01), rgba(0,0,0,0.1))",
+                    filter: "blur(6px)"
+                  }}
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                />
 
-    {/* Glow Effect */}
-    <motion.div
-      className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-      style={{
-        background: scrolled
-          ? "conic-gradient(from 0deg, rgba(255,255,255,0.15), rgba(255,255,255,0.02), rgba(255,255,255,0.15))"
-          : "conic-gradient(from 0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.01), rgba(0,0,0,0.1))",
-        filter: "blur(6px)"
-      }}
-      animate={{ rotate: [0, 360] }}
-      transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-    />
+                {/* Button Content */}
+                <div className="relative w-6 h-6 flex items-center justify-center">
+                  {/* Enhanced Hamburger Animation */}
+                  <div className="relative w-6 h-6">
+                    {/* Top bar */}
+                    <motion.span
+                      className={`absolute left-0 block h-0.5 rounded-full transition-colors duration-300 ${
+                        scrolled ? "bg-bg" : "bg-fg"
+                      }`}
+                      animate={{
+                        rotate: mobileMenuOpen ? 45 : 0,
+                        y: mobileMenuOpen ? 0 : -6,
+                        width: mobileMenuOpen ? "24px" : "20px",
+                        x: mobileMenuOpen ? 0 : 2,
+                      }}
+                      transition={{ 
+                        duration: 0.3, 
+                        ease: [0.25, 0.1, 0.25, 1],
+                        width: { duration: 0.2 }
+                      }}
+                      style={{ 
+                        top: "50%", 
+                        transformOrigin: "center center",
+                        marginTop: "-1px"
+                      }}
+                    />
+                    
+                    {/* Middle bar - transforms into dot */}
+                    <motion.span
+                      className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block rounded-full transition-colors duration-300 ${
+                        scrolled ? "bg-bg" : "bg-fg"
+                      }`}
+                      animate={{
+                        opacity: mobileMenuOpen ? 0 : 1,
+                        scale: mobileMenuOpen ? 0.3 : 1,
+                        width: mobileMenuOpen ? "2px" : "24px",
+                        height: mobileMenuOpen ? "2px" : "2px",
+                      }}
+                      transition={{ 
+                        duration: 0.25,
+                        ease: [0.25, 0.1, 0.25, 1]
+                      }}
+                    />
+                    
+                    {/* Bottom bar */}
+                    <motion.span
+                      className={`absolute left-0 block h-0.5 rounded-full transition-colors duration-300 ${
+                        scrolled ? "bg-bg" : "bg-fg"
+                      }`}
+                      animate={{
+                        rotate: mobileMenuOpen ? -45 : 0,
+                        y: mobileMenuOpen ? 0 : 6,
+                        width: mobileMenuOpen ? "24px" : "16px",
+                        x: mobileMenuOpen ? 0 : 4,
+                      }}
+                      transition={{ 
+                        duration: 0.3, 
+                        ease: [0.25, 0.1, 0.25, 1],
+                        width: { duration: 0.2 }
+                      }}
+                      style={{ 
+                        top: "50%", 
+                        transformOrigin: "center center",
+                        marginTop: "-1px"
+                      }}
+                    />
+                  </div>
 
-    {/* Button Content */}
-    <div className="relative w-6 h-6 flex items-center justify-center">
-      {/* Enhanced Hamburger Animation */}
-      <div className="relative w-6 h-6">
-        {/* Top bar */}
-        <motion.span
-          className={`absolute left-0 block h-0.5 rounded-full transition-colors duration-300 ${
-            scrolled ? "bg-bg" : "bg-fg"
-          }`}
-          animate={{
-            rotate: mobileMenuOpen ? 45 : 0,
-            y: mobileMenuOpen ? 0 : -6,
-            width: mobileMenuOpen ? "24px" : "20px",
-            x: mobileMenuOpen ? 0 : 2,
-          }}
-          transition={{ 
-            duration: 0.3, 
-            ease: [0.25, 0.1, 0.25, 1],
-            width: { duration: 0.2 }
-          }}
-          style={{ 
-            top: "50%", 
-            transformOrigin: "center center",
-            marginTop: "-1px"
-          }}
-        />
-        
-        {/* Middle bar - transforms into dot */}
-        <motion.span
-          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block rounded-full transition-colors duration-300 ${
-            scrolled ? "bg-bg" : "bg-fg"
-          }`}
-          animate={{
-            opacity: mobileMenuOpen ? 0 : 1,
-            scale: mobileMenuOpen ? 0.3 : 1,
-            width: mobileMenuOpen ? "2px" : "24px",
-            height: mobileMenuOpen ? "2px" : "2px",
-          }}
-          transition={{ 
-            duration: 0.25,
-            ease: [0.25, 0.1, 0.25, 1]
-          }}
-        />
-        
-        {/* Bottom bar */}
-        <motion.span
-          className={`absolute left-0 block h-0.5 rounded-full transition-colors duration-300 ${
-            scrolled ? "bg-bg" : "bg-fg"
-          }`}
-          animate={{
-            rotate: mobileMenuOpen ? -45 : 0,
-            y: mobileMenuOpen ? 0 : 6,
-            width: mobileMenuOpen ? "24px" : "16px",
-            x: mobileMenuOpen ? 0 : 4,
-          }}
-          transition={{ 
-            duration: 0.3, 
-            ease: [0.25, 0.1, 0.25, 1],
-            width: { duration: 0.2 }
-          }}
-          style={{ 
-            top: "50%", 
-            transformOrigin: "center center",
-            marginTop: "-1px"
-          }}
-        />
-      </div>
+                  {/* Pulse Effect when Active */}
+                  {mobileMenuOpen && (
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl"
+                      style={{
+                        background: scrolled
+                          ? "rgba(255,255,255,0.1)"
+                          : "rgba(0,0,0,0.1)"
+                      }}
+                      animate={{ 
+                        scale: [1, 1.1, 1],
+                        opacity: [0.3, 0.6, 0.3]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                  )}
+                </div>
 
-      {/* Pulse Effect when Active */}
-      {mobileMenuOpen && (
-        <motion.div
-          className="absolute inset-0 rounded-2xl"
-          style={{
-            background: scrolled
-              ? "rgba(255,255,255,0.1)"
-              : "rgba(0,0,0,0.1)"
-          }}
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.3, 0.6, 0.3]
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-      )}
-    </div>
+                {/* Micro-interaction Particles */}
+                <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+                  {[...Array(3)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className={`
+                        absolute w-1 h-1 rounded-full opacity-0 group-hover:opacity-60
+                        ${scrolled ? "bg-bg/40" : "bg-fg/40"}
+                      `}
+                      style={{
+                        left: `${25 + i * 20}%`,
+                        top: `${30 + (i % 2) * 40}%`
+                      }}
+                      animate={{
+                        scale: [0, 1, 0],
+                        rotate: [0, 180, 360],
+                        opacity: [0, 0.6, 0]
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        delay: i * 0.2,
+                        repeat: Infinity,
+                        repeatDelay: 2
+                      }}
+                    />
+                  ))}
+                </div>
+              </motion.button>
 
-    {/* Micro-interaction Particles */}
-    <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
-      {[...Array(3)].map((_, i) => (
-        <motion.div
-          key={i}
-          className={`
-            absolute w-1 h-1 rounded-full opacity-0 group-hover:opacity-60
-            ${scrolled ? "bg-bg/40" : "bg-fg/40"}
-          `}
-          style={{
-            left: `${25 + i * 20}%`,
-            top: `${30 + (i % 2) * 40}%`
-          }}
-          animate={{
-            scale: [0, 1, 0],
-            rotate: [0, 180, 360],
-            opacity: [0, 0.6, 0]
-          }}
-          transition={{
-            duration: 1.5,
-            delay: i * 0.2,
-            repeat: Infinity,
-            repeatDelay: 2
-          }}
-        />
-      ))}
-    </div>
-  </motion.button>
-
-  {/* Status Indicator - Optional subtle detail */}
-  <motion.div
-    className={`
-      absolute -bottom-1 -right-1 w-2 h-2 rounded-full transition-colors duration-300
-      ${mobileMenuOpen 
-        ? (scrolled ? "bg-bg shadow-lg shadow-bg/20" : "bg-fg shadow-lg shadow-fg/20")
-        : "bg-transparent"
-      }
-    `}
-    animate={mobileMenuOpen ? {
-      scale: [1, 1.2, 1],
-      opacity: [0.6, 1, 0.6]
-    } : {
-      scale: 0,
-      opacity: 0
-    }}
-    transition={{ 
-      duration: mobileMenuOpen ? 1.5 : 0.2, 
-      repeat: mobileMenuOpen ? Infinity : 0 
-    }}
-  />
-</motion.div>
+              {/* Status Indicator - Optional subtle detail */}
+              <motion.div
+                className={`
+                  absolute -bottom-1 -right-1 w-2 h-2 rounded-full transition-colors duration-300
+                  ${mobileMenuOpen 
+                    ? (scrolled ? "bg-bg shadow-lg shadow-bg/20" : "bg-fg shadow-lg shadow-fg/20")
+                    : "bg-transparent"
+                  }
+                `}
+                animate={mobileMenuOpen ? {
+                  scale: [1, 1.2, 1],
+                  opacity: [0.6, 1, 0.6]
+                } : {
+                  scale: 0,
+                  opacity: 0
+                }}
+                transition={{ 
+                  duration: mobileMenuOpen ? 1.5 : 0.2, 
+                  repeat: mobileMenuOpen ? Infinity : 0 
+                }}
+              />
+            </motion.div>
           </div>
         </Container>
       </header>
