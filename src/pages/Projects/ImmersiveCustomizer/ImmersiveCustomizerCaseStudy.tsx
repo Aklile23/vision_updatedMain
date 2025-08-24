@@ -158,7 +158,7 @@ export default function ImmersiveCustomizerCaseStudy() {
                 transition={{ delay: 0.8 }}
               >
                 <a
-                  href="/demo/"
+                  href="/icdemo/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-fg text-bg
