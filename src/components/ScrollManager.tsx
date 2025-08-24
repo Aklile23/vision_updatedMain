@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+
 import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,7 +13,7 @@ export default function ScrollManager() {
   const normalizerRef = useRef<Observer | null>(null);
   const updateRef = useRef<((time: number) => void) | null>(null);
 
-  const { pathname, hash } = useLocation();
+  
 
   // Initialize Lenis and setup
   const initSmoothScroll = () => {
@@ -156,48 +156,7 @@ export default function ScrollManager() {
   }, []);
 
   // Scroll to hash / top on route change and refresh triggers
-  // Scroll to hash / top on route change and refresh triggers
-useLayoutEffect(() => {
-  console.groupCollapsed("[ScrollManager] route change");
-  console.info("[ScrollManager] pathname:", pathname, "hash:", hash);
-  console.info("[ScrollManager] overlayOpenRef:", overlayOpenRef.current);
-
-  // REMOVED: The overlay check that was causing the bug
-  // if (overlayOpenRef.current) {
-  //   console.warn("[ScrollManager] overlay open -> skip programmatic scroll");
-  //   console.groupEnd();
-  //   return;
-  // }
-
-  requestAnimationFrame(() => {
-    if (hash) {
-      const el = document.querySelector(hash);
-      if (el) {
-        console.info("[ScrollManager] scrolling to hash element", hash);
-        if (lenisRef.current) {
-          // @ts-expect-error Lenis accepts Element
-          lenisRef.current.scrollTo(el);
-        } else {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }
-    } else {
-      console.info("[ScrollManager] scrolling to top");
-      if (lenisRef.current) {
-        lenisRef.current.scrollTo(0);
-      } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    }
-
-    // Refresh ScrollTrigger after scroll
-    setTimeout(() => {
-      ScrollTrigger.refresh();
-      console.info("[ScrollManager] ST.refresh() after scroll");
-      console.groupEnd();
-    }, 100);
-  });
-}, [pathname, hash]);
+  
 
   return null;
 }
