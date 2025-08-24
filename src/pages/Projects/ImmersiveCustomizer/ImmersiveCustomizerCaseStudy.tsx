@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import Container from "../../../components/Container";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useScrollTop } from "../../../hooks/useScrollTop";
 
 export default function ImmersiveCustomizerCaseStudy() {
@@ -9,6 +9,7 @@ export default function ImmersiveCustomizerCaseStudy() {
   useScrollTop ();
 
   const tiltTickingRef = useRef(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const handleMouseMove = (e: { currentTarget: any; clientX: number; clientY: number }) => {
     const card = e.currentTarget;
@@ -182,15 +183,20 @@ export default function ImmersiveCustomizerCaseStudy() {
                     className="w-full h-full object-cover"
                     poster="/images/projects/ImmersiveCustomizer/1.png"
                     controlsList="nodownload"
+                    onPlay={() => setIsPlaying(true)}
+                    onPause={() => setIsPlaying(false)}
                   />
                 </div>
 
                 {/* Play Indicator Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                  <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">
-                    <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
+                {!isPlaying && (
+                  <div className="absolute inset-0 flex items-center justify-center opacity-100 group-hover:scale-110 transition-opacity duration-300 pointer-events-none">
+                    <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">
+                      <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
+                    </div>
                   </div>
-                </div>
+                )}
+
 
                 {/* Gradient overlays for better text contrast */}
                 <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/30 to-transparent pointer-events-none" />
