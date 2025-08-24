@@ -167,7 +167,7 @@ useEffect(() => {
                       key={item.to}
                       to={item.to}
                       className="group relative"
-                      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                      
                     >
                       {({ isActive }) => (
                         <motion.div
