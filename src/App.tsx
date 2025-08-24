@@ -6,14 +6,14 @@ import Projects from "./pages/Projects";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import ScrollManager from "./components/ScrollManager";
+// import ScrollManager from "./components/ScrollManager";
 
 import ImmersiveCustomizerCaseStudy from "./pages/Projects/ImmersiveCustomizer/ImmersiveCustomizerCaseStudy";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <ScrollManager />
+      {/* <ScrollManager /> */}
       <Routes>
         <Route element={<Layout />}>
           {/* Pages */}
