@@ -9,10 +9,12 @@ import NotFound from "./pages/NotFound";
 import ScrollManager from "./components/ScrollManager";
 
 import ImmersiveCustomizerCaseStudy from "./pages/Projects/ImmersiveCustomizer/ImmersiveCustomizerCaseStudy";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   return (
     <BrowserRouter>
+    <ScrollToTop />
       <ScrollManager />
       <Routes>
         <Route element={<Layout />}>
