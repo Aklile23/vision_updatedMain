@@ -116,7 +116,12 @@ export default function ScrollManager() {
       if (detail.overlayOpen) {
         // Mobile menu opened - destroy smooth scroll
         destroySmoothScroll();
-      } 
+      } else {
+        // Mobile menu closed - reinitialize smooth scroll
+        setTimeout(() => {
+          overlayOpenRef.current = false;
+        }, 50);
+      }
     };
 
     window.addEventListener("app:overlay-change", onOverlayToggle);
