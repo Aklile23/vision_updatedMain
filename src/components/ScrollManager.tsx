@@ -132,15 +132,15 @@ export default function ScrollManager() {
               window.scrollTo(0, 0);
             });
             // FIRST-TOUCH GUARD (mobile): if the browser tries to restore on first touch, re-zero.
-            const killFirstTouchSnap = () => {
-              lenisRef.current?.scrollTo(0, { immediate: true });
-              window.scrollTo(0, 0);
-            };
-            window.addEventListener("touchstart", killFirstTouchSnap, { once: true, passive: true });
-            // Safety removal in case user doesn't touch soon
-            setTimeout(() => {
-              window.removeEventListener("touchstart", killFirstTouchSnap);
-            }, 1200);
+          const killFirstTouchSnap = () => {
+            lenisRef.current?.scrollTo(0, { immediate: true });
+            window.scrollTo(0, 0);
+          };
+          window.addEventListener("touchstart", killFirstTouchSnap, { once: true, passive: true });
+          // Safety removal in case user doesn't touch soon
+          setTimeout(() => {
+            window.removeEventListener("touchstart", killFirstTouchSnap);
+          }, 1200);
 
             setTimeout(() => ScrollTrigger.refresh(), 100);
           }
@@ -178,36 +178,46 @@ export default function ScrollManager() {
     console.groupCollapsed("[ScrollManager] route change");
     console.info("[ScrollManager] pathname:", pathname, "hash:", hash);
     console.info("[ScrollManager] overlayOpenRef:", overlayOpenRef.current);
-
-    // If an overlay is open, don't do any programmatic scrolls
+  
+    // If an overlay (mobile menu) is open, skip programmatic scrolls
     if (overlayOpenRef.current) {
       console.warn("[ScrollManager] overlay open -> skip programmatic scroll");
       console.groupEnd();
       return;
     }
-
+  
+    // Wait a frame so layout is ready (important for mobile)
     requestAnimationFrame(() => {
-      // inside the "[ScrollManager] route change" useLayoutEffect
       if (hash) {
         const el = document.querySelector(hash);
         if (el) {
           if (lenisRef.current) {
             // @ts-expect-error Lenis accepts Element
-            lenisRef.current.scrollTo(el, { immediate: true }); // ⬅ make it immediate
+            lenisRef.current.scrollTo(el, { immediate: true });
           } else {
-            el.scrollIntoView({ behavior: "auto", block: "start" }); // ⬅ no smooth
+            (el as HTMLElement).scrollIntoView({ behavior: "auto", block: "start" });
           }
         }
       } else {
         if (lenisRef.current) {
-          lenisRef.current.scrollTo(0, { immediate: true }); // ⬅ force top, immediate
+          lenisRef.current.scrollTo(0, { immediate: true });
         } else {
-          window.scrollTo({ top: 0, left: 0, behavior: "auto" }); // ⬅ no smooth
+          window.scrollTo({ top: 0, left: 0, behavior: "auto" });
         }
       }
-
-
-      // Refresh ScrollTrigger after scroll
+  
+      // FIRST-GESTURE GUARD:
+      // If the browser tries to restore a saved position on the very first user input,
+      // immediately force back to top once, then remove the listeners.
+      const killFirstGestureSnap = () => {
+        lenisRef.current?.scrollTo(0, { immediate: true });
+        window.scrollTo(0, 0);
+      };
+      window.addEventListener("touchstart", killFirstGestureSnap, { once: true, passive: true });
+      window.addEventListener("wheel",      killFirstGestureSnap, { once: true, passive: true });
+      window.addEventListener("scroll",     killFirstGestureSnap, { once: true, passive: true });
+  
+      // Refresh ScrollTrigger after the jump
       setTimeout(() => {
         ScrollTrigger.refresh();
         console.info("[ScrollManager] ST.refresh() after scroll");

@@ -80,7 +80,7 @@ export default function Navbar() {
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
-              <NavLink to="/" className="flex items-center gap-3 group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <NavLink to="/" className="flex items-center gap-3 group" onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}>
                 {/* Logo Image */}
                 <div
                   className={`relative overflow-hidden rounded-lg transition-all duration-300 ${
