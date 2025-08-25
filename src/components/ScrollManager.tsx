@@ -118,16 +118,19 @@ export default function ScrollManager() {
         destroySmoothScroll();
       } else {
         // Mobile menu closed - reinitialize smooth scroll
+        // ScrollManager.tsx, inside onOverlayToggle when overlay closes:
         setTimeout(() => {
           if (!overlayOpenRef.current) {
             initSmoothScroll();
-            
-            // Refresh after reinitialization
-            setTimeout(() => {
-              ScrollTrigger.refresh();
-            }, 100);
+            // Reset scroll again to kill native restore
+            requestAnimationFrame(() => {
+              lenisRef.current?.scrollTo(0, { immediate: true });
+              window.scrollTo(0, 0);
+            });
+            setTimeout(() => ScrollTrigger.refresh(), 100);
           }
         }, 50);
+
       }
     };
 
@@ -170,23 +173,23 @@ export default function ScrollManager() {
 
     requestAnimationFrame(() => {
       // inside the "[ScrollManager] route change" useLayoutEffect
-if (hash) {
-  const el = document.querySelector(hash);
-  if (el) {
-    if (lenisRef.current) {
-      // @ts-expect-error Lenis accepts Element
-      lenisRef.current.scrollTo(el, { immediate: true }); // ⬅ make it immediate
-    } else {
-      el.scrollIntoView({ behavior: "auto", block: "start" }); // ⬅ no smooth
-    }
-  }
-} else {
-  if (lenisRef.current) {
-    lenisRef.current.scrollTo(0, { immediate: true }); // ⬅ force top, immediate
-  } else {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" }); // ⬅ no smooth
-  }
-}
+      if (hash) {
+        const el = document.querySelector(hash);
+        if (el) {
+          if (lenisRef.current) {
+            // @ts-expect-error Lenis accepts Element
+            lenisRef.current.scrollTo(el, { immediate: true }); // ⬅ make it immediate
+          } else {
+            el.scrollIntoView({ behavior: "auto", block: "start" }); // ⬅ no smooth
+          }
+        }
+      } else {
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(0, { immediate: true }); // ⬅ force top, immediate
+        } else {
+          window.scrollTo({ top: 0, left: 0, behavior: "auto" }); // ⬅ no smooth
+        }
+      }
 
 
       // Refresh ScrollTrigger after scroll

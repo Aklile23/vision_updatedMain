@@ -14,7 +14,7 @@ useEffect(() => {
   console.info("mobileMenuOpen =", mobileMenuOpen);
 
   // Lock or unlock body scroll
-  document.body.style.overflow = mobileMenuOpen ? "hidden" : "unset";
+  document.body.style.overflow = mobileMenuOpen ? "hidden" : "auto";
 
   // Dispatch event to ScrollManager - IMPORTANT: dispatch every time
   const detail = { overlayOpen: mobileMenuOpen };
@@ -24,7 +24,7 @@ useEffect(() => {
   // Cleanup
   return () => {
     console.info("cleanup -> unset body overflow");
-    document.body.style.overflow = "unset";
+    document.body.style.overflow = "auto";
     console.groupEnd();
   };
 }, [mobileMenuOpen]);
