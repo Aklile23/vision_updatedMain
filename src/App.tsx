@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import ScrollManager from "./components/ScrollManager";
 
 import ImmersiveCustomizerCaseStudy from "./pages/Projects/ImmersiveCustomizer/ImmersiveCustomizerCaseStudy";
+import AerialPhotogrammetryCaseStudy from "./pages/Projects/AerialPhotogrammetry/AerialPhotogrammetryCaseStudy";
 
 export default function App() {
   return (
@@ -26,6 +27,8 @@ export default function App() {
 
           {/* Projects */}
           <Route path="/projects/IC-CaseStudy" element={<ImmersiveCustomizerCaseStudy />} />
+          <Route path="/projects/AP-CaseStudy" element={<AerialPhotogrammetryCaseStudy />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

@@ -59,7 +59,7 @@ export default function ImmersiveCustomizerCaseStudy() {
   return (
     <main className="bg-bg text-fg min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 md:py-32">
+      <section className="relative overflow-hidden py-30 md:py-32">
         {/* Background Effects */}
         <div className="absolute inset-0">
           <div className="absolute top-20 right-20 w-96 h-96 bg-fg/[0.02] rounded-full blur-3xl" />
@@ -158,7 +158,7 @@ export default function ImmersiveCustomizerCaseStudy() {
                 transition={{ delay: 0.8 }}
               >
                 <a
-                  href="/icdemo/"
+                  href="/projects/ImmersiveCustomizerDemo/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-fg text-bg
@@ -683,7 +683,7 @@ export default function ImmersiveCustomizerCaseStudy() {
                       to="/contact"
                       className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-semibold text-lg hover:bg-white/90 hover:shadow-xl transition-all duration-300"
                     >
-                      Request Demo
+                      Discuss This Project
                       <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>

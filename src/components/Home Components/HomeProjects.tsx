@@ -138,7 +138,7 @@ const HomeProjects = () => {
       desc: "Creation of 3D geospatial models of construction sites using drone photography. These reconstructed spaces facilitate the management of large-scale projects.",
       tags: ["Photogrammetry", "Reality Capture"],
       image: "/images/Home/projects/Aerial Photogrammetry.png",
-      caseStudyLink: "",
+      caseStudyLink: "/projects/AP-CaseStudy",
       category: "3D Mapping",
       year: "2023",
       client: "Construction",

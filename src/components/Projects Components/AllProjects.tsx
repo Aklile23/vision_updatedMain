@@ -38,7 +38,7 @@ const AllProjects = () => {
           visual: "photogrammetry",
           image: "/images/projects/AerialPhotogrammetry/1.png",
           status: "Done",
-          caseStudyLink: "/projects/IC-CaseStudy" 
+          caseStudyLink: "/projects/AP-CaseStudy" 
         },
         {
           id: 3,
@@ -52,8 +52,8 @@ const AllProjects = () => {
           impact: "Immersive user engagement & interaction",
           visual: "motion",
           image: "/images/projects/InteractiveVisuals/4.png",
-          status: "Done",
-          caseStudyLink: "/projects/IC-CaseStudy" 
+          status: "Soon",
+          caseStudyLink: "" 
         },
         {
           id: 4,
@@ -67,8 +67,8 @@ const AllProjects = () => {
           impact: "Improved accessibility & user experience",
           visual: "ai-assistant",
           image: "/images/projects/VirtualAssistant/2.png",
-          status: "Done",
-          caseStudyLink: "/projects/IC-CaseStudy" 
+          status: "Soon",
+          caseStudyLink: "" 
         },
         {
           id: 5,

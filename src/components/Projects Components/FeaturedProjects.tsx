@@ -53,7 +53,7 @@ const FeaturedProjects = () => {
           technologies: ["Drone Technology", "Point Clouds", "3D Reconstruction"],
           impact: "Accurate site documentation & heritage preservation",
           visual: "photogrammetry",
-          caseStudyLink: "/projects/IC-CaseStudy" 
+          caseStudyLink: "/projects/AP-CaseStudy" 
         },
         {
           id: 3,
