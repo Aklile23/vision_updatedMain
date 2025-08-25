@@ -60,6 +60,10 @@ export default function ScrollManager() {
     });
 
     ScrollTrigger.defaults({ scroller });
+    if ((ScrollTrigger as any).clearScrollMemory) {
+      (ScrollTrigger as any).clearScrollMemory();
+    }
+    
     normalizerRef.current = ScrollTrigger.normalizeScroll(true) || null;
 
     requestAnimationFrame(() => {
@@ -127,6 +131,17 @@ export default function ScrollManager() {
               lenisRef.current?.scrollTo(0, { immediate: true });
               window.scrollTo(0, 0);
             });
+            // FIRST-TOUCH GUARD (mobile): if the browser tries to restore on first touch, re-zero.
+            const killFirstTouchSnap = () => {
+              lenisRef.current?.scrollTo(0, { immediate: true });
+              window.scrollTo(0, 0);
+            };
+            window.addEventListener("touchstart", killFirstTouchSnap, { once: true, passive: true });
+            // Safety removal in case user doesn't touch soon
+            setTimeout(() => {
+              window.removeEventListener("touchstart", killFirstTouchSnap);
+            }, 1200);
+
             setTimeout(() => ScrollTrigger.refresh(), 100);
           }
         }, 50);

@@ -8,27 +8,6 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const ticking = useRef(false);
 
-  // In your mobile menu useEffect
-useEffect(() => {
-  console.groupCollapsed("[Navbar] mobileMenuOpen effect");
-  console.info("mobileMenuOpen =", mobileMenuOpen);
-
-  // Lock or unlock body scroll
-  document.body.style.overflow = mobileMenuOpen ? "hidden" : "auto";
-
-  // Dispatch event to ScrollManager - IMPORTANT: dispatch every time
-  const detail = { overlayOpen: mobileMenuOpen };
-  console.info("dispatch app:overlay-change", detail);
-  window.dispatchEvent(new CustomEvent("app:overlay-change", { detail }));
-
-  // Cleanup
-  return () => {
-    console.info("cleanup -> unset body overflow");
-    document.body.style.overflow = "auto";
-    console.groupEnd();
-  };
-}, [mobileMenuOpen]);
-
   useEffect(() => {
     const onScroll = () => {
       if (ticking.current) return;
@@ -53,7 +32,7 @@ useEffect(() => {
     console.info("[Navbar] mobileMenuOpen =", mobileMenuOpen);
   
     // Lock or unlock body scroll
-    document.body.style.overflow = mobileMenuOpen ? "hidden" : "unset";
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "auto";
     console.info("[Navbar] body.style.overflow ->", document.body.style.overflow);
   
     // Dispatch event to ScrollManager
@@ -64,7 +43,7 @@ useEffect(() => {
     // Cleanup
     return () => {
       console.info("[Navbar] cleanup -> unset body overflow");
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "auto";
       console.groupEnd();
     };
   }, [mobileMenuOpen]);
