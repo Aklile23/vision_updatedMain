@@ -3,20 +3,27 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 
-// Disable native scroll restoration globally
-if ('scrollRestoration' in history) {
-  history.scrollRestoration = 'manual';
-}
-
-// Handle bfcache restores (iOS/Android Safari, etc.)
-window.addEventListener('pageshow', (e: PageTransitionEvent) => {
-  // Safari exposes `persisted` on PageTransitionEvent
-  if ((e as any).persisted) {
-    requestAnimationFrame(() => {
-      window.scrollTo(0, 0);
-    });
-  }
+// DEBUG: lifecycle + bfcache
+console.info("[main] scrollRestoration =", (history as any).scrollRestoration);
+window.addEventListener("pageshow", (e: any) => {
+  console.groupCollapsed("[main] pageshow");
+  console.log("persisted:", !!e.persisted);
+  console.log("scrollY:", window.scrollY);
+  console.groupEnd();
 });
+window.addEventListener("pagehide", (e: any) => {
+  console.groupCollapsed("[main] pagehide");
+  console.log("persisted:", !!e.persisted);
+  console.log("scrollY:", window.scrollY);
+  console.groupEnd();
+});
+window.addEventListener("popstate", () => {
+  console.info("[main] popstate: scrollY=", window.scrollY);
+});
+document.addEventListener("visibilitychange", () => {
+  console.info("[main] visibility:", document.visibilityState, "scrollY:", window.scrollY);
+});
+
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

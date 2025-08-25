@@ -27,26 +27,7 @@ export default function Navbar() {
     setMobileMenuOpen(false);
   }, []);
 
-  useEffect(() => {
-    console.groupCollapsed("[Navbar] mobileMenuOpen effect");
-    console.info("[Navbar] mobileMenuOpen =", mobileMenuOpen);
-  
-    // Lock or unlock body scroll
-    document.body.style.overflow = mobileMenuOpen ? "hidden" : "auto";
-    console.info("[Navbar] body.style.overflow ->", document.body.style.overflow);
-  
-    // Dispatch event to ScrollManager
-    const detail = { overlayOpen: mobileMenuOpen };
-    console.info("[Navbar] dispatch app:overlay-change", detail);
-    window.dispatchEvent(new CustomEvent("app:overlay-change", { detail }));
-  
-    // Cleanup
-    return () => {
-      console.info("[Navbar] cleanup -> unset body overflow");
-      document.body.style.overflow = "auto";
-      console.groupEnd();
-    };
-  }, [mobileMenuOpen]);
+
   
 
   // Header shell
