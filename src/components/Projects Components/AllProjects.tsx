@@ -253,7 +253,7 @@ const AllProjects = () => {
                         </NavLink>
 
                         <NavLink
-                          to={project.caseStudyLink} // 👈 link comes from array
+                          to={project.caseStudyLink}
                           className="px-4 py-2 rounded-full border border-fg/20 text-fg hover:border-fg/40 hover:bg-fg/5 transition-all duration-300 text-sm"
                         >
                           Details
